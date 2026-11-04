@@ -1,0 +1,1249 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ondi · brand kit</title>
+<!-- Respaldo redondeado para navegadores sin ui-rounded (Chrome, Firefox); Safari usa SF Pro Rounded del sistema -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Color (Theme.swift propuesto) */
+    /* Paleta (inspirada en @uiuxaadi): de medianoche a niebla */
+    --c1: #06141B; --c2: #11212D; --c3: #253745; --c4: #4A5C6A; --c5: #9BA8AB; --c6: #CCD0CF;
+    --white: #FFFFFF;
+    --surface: #F3F5F6;
+    --surface-2: #E3E7E8;
+    --line: #CCD0CF;
+    --ink-soft: #4A5C6A;
+    --ink: #06141B;
+    --accent: #11212D;
+    --gloss-top: #2C4252;
+    --gloss-bottom: #06141B;
+    --ok: #3E8E73;
+    --warn: #C9A15B;
+    --bad: #C2584E;
+    /* Forma */
+    --r-s: 14px; --r-m: 20px; --r-l: 28px; --r-xl: 36px;
+    /* Tipografía */
+    --font: ui-rounded, "SF Pro Rounded", "SF Pro Text", system-ui, -apple-system, "Nunito", sans-serif;
+    /* Movimiento: los JS de abajo reemplazan estas curvas por resortes reales */
+    --liquid: cubic-bezier(.34, 1.36, .5, 1); --liquid-d: 620ms;
+    --melt: cubic-bezier(.22, 1, .36, 1);     --melt-d: 900ms;
+    --ripple: cubic-bezier(.3, 1.8, .5, 1);   --ripple-d: 380ms;
+    /* Curvas y tiempos de bencho.dev (MIT): asentar, aparecer con un pelín de rebote, revelar texto */
+    --out: cubic-bezier(.22, 1, .36, 1); --pop: cubic-bezier(.24, 1.34, .38, 1); --reveal: cubic-bezier(.16, 1, .3, 1);
+    --t-fast: 160ms; --t-base: 220ms; --t-slow: 420ms; --t-long: 600ms;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: var(--font);
+    color: var(--ink);
+    background: linear-gradient(#fff, var(--surface) 40%, var(--surface-2));
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ---------- Fondo acuoso ---------- */
+  .ink-drops { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+  .ink-drops i {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(6,20,27,.10), transparent);
+    filter: blur(40px);
+    animation: drift 16s ease-in-out infinite alternate;
+  }
+  .ink-drops i:nth-child(1) { width: 60vw; height: 48vw; left: -18vw; top: -20vw; }
+  .ink-drops i:nth-child(2) { width: 44vw; height: 36vw; right: -12vw; top: 30vh; animation-duration: 19s; animation-delay: -6s; opacity: .7; }
+  .ink-drops i:nth-child(3) { width: 34vw; height: 28vw; left: 30vw; bottom: -14vw; animation-duration: 22s; animation-delay: -11s; opacity: .6; }
+  @keyframes drift {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(8vw, 6vh) scale(1.12, .92); }
+  }
+  .ink-drops::after { content: ""; position: absolute; inset: 0; background: rgba(255,255,255,.35); }
+
+  /* ---------- Estructura ---------- */
+  main { max-width: 1180px; margin: 0 auto; padding: 0 32px 120px; }
+  nav.toc {
+    position: sticky; top: 16px; z-index: 10;
+    display: flex; gap: 2px; width: max-content; max-width: 100%; margin: 16px auto 0; padding: 4px;
+    background: rgba(255,255,255,.78); backdrop-filter: blur(18px) saturate(1.4); -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    border-radius: 999px; box-shadow: 0 10px 30px rgba(6,20,27,.08), inset 0 0 0 1px rgba(6,20,27,.06);
+    overflow-x: auto;
+  }
+  nav.toc a {
+    color: var(--ink); text-decoration: none; font-size: 13px; font-weight: 600;
+    padding: 7px 14px; border-radius: 999px; white-space: nowrap;
+    transition: background var(--liquid-d) var(--liquid), color var(--liquid-d) var(--liquid);
+  }
+  nav.toc a:hover { background: var(--surface-2); }
+  section { padding-top: 96px; }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 10px; }
+  h1 { font-size: 64px; line-height: 1.02; letter-spacing: -.03em; margin: 0; font-weight: 800; }
+  h2 { font-size: 38px; letter-spacing: -.02em; margin: 0 0 12px; font-weight: 800; }
+  h3 { font-size: 18px; margin: 0 0 8px; font-weight: 700; }
+  p { line-height: 1.55; }
+  .lead { font-size: 18px; color: var(--ink-soft); max-width: 680px; margin: 0 0 32px; }
+  .muted { color: var(--ink-soft); }
+  .small { font-size: 13px; }
+  code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; background: var(--surface-2); padding: 2px 7px; border-radius: 8px; }
+
+  .glass {
+    position: relative;
+    background: rgba(255,255,255,.62);
+    backdrop-filter: blur(25px) saturate(190%); -webkit-backdrop-filter: blur(25px) saturate(190%);
+    border-radius: var(--r-l);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 10px 40px rgba(6,20,27,.07);
+    padding: 24px;
+  }
+  /* Borde de luz: más brillante arriba a la izquierda y abajo a la derecha, como vidrio mojado */
+  .glass::before, .rim::before {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none;
+    background: linear-gradient(142deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.18) 26%, rgba(155,168,171,.25) 62%, rgba(255,255,255,.6) 100%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  }
+  .grid { display: grid; gap: 18px; }
+  .g2 { grid-template-columns: repeat(2, 1fr); }
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  .g4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 900px) { .g3, .g4 { grid-template-columns: repeat(2, 1fr); } h1 { font-size: 44px; } }
+
+  /* ---------- Hero ---------- */
+  .hero { display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center; padding-top: 80px; }
+  .hero .mark-wrap { width: 260px; height: 260px; filter: drop-shadow(0 30px 40px rgba(6,20,27,.28)); }
+  .hero .tag { font-size: 22px; color: var(--ink-soft); margin: 14px 0 26px; max-width: 520px; }
+  .name-pick { display: inline-flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .note { margin-top: 18px; font-size: 13px; color: var(--ink-soft); max-width: 600px; }
+
+  /* ---------- Botones ---------- */
+  .pill {
+    --lift: 0px;
+    appearance: none; border: 0; cursor: pointer; font: 600 14px/1 var(--font);
+    padding: 11px 20px; border-radius: 999px; color: var(--ink);
+    background: linear-gradient(rgba(255,255,255,.95), rgba(255,255,255,.8));
+    box-shadow: 0 4px 10px rgba(6,20,27,.07), inset 0 0 0 1px rgba(6,20,27,.09), inset 0 1.5px 0 #fff;
+    transform: translateY(var(--lift)) scale(var(--sx, 1), var(--sy, 1));
+    transition: transform var(--ripple-d) var(--ripple), box-shadow var(--liquid-d) var(--liquid), background var(--liquid-d) var(--liquid);
+    display: inline-flex; gap: 8px; align-items: center;
+  }
+  .pill:active { --sx: 1.03; --sy: .93; --lift: 0px; }
+  .pill.prominent {
+    color: #fff;
+    background: linear-gradient(var(--gloss-top), var(--gloss-bottom));
+    box-shadow: 0 6px 16px rgba(6,20,27,.24), inset 0 0 0 1px rgba(255,255,255,.1), inset 0 1.5px 0 rgba(255,255,255,.28);
+  }
+  .pill.large { font-size: 18px; padding: 16px 30px; }
+  .pill.on { color: #fff; background: linear-gradient(var(--gloss-top), var(--gloss-bottom)); }
+
+  /* ---------- Orbe que se llena de agua ---------- */
+  .orb {
+    position: relative; width: 58px; height: 58px; border-radius: 50%; border: 0; padding: 0; cursor: pointer;
+    background: #fff; overflow: hidden; color: var(--ink);
+    box-shadow: 0 4px 12px rgba(6,20,27,.1), inset 0 0 0 1px rgba(6,20,27,.08);
+    transform: scale(var(--s, 1), var(--sy, 1));
+    transition: transform var(--liquid-d) var(--liquid), box-shadow var(--liquid-d) var(--liquid), color 300ms ease;
+  }
+  .orb svg.glyph { position: relative; z-index: 2; width: 22px; height: 22px; }
+  .orb .water {
+    position: absolute; left: -50%; width: 200%; height: 140%; top: 100%;
+    transition: top var(--melt-d) var(--melt);
+  }
+  .orb .water svg { width: 100%; height: 100%; animation: swell 1.6s linear infinite; }
+  @keyframes swell { from { transform: translateX(0); } to { transform: translateX(-25%); } }
+  .orb::after { content: ""; position: absolute; inset: 2px 2px 50% 2px; border-radius: 50% 50% 40% 40%; background: linear-gradient(rgba(255,255,255,.75), transparent); z-index: 3; pointer-events: none; transition: opacity 300ms; }
+  /* Sin efecto al pasar el ratón: al mantener pulsado se llena de agua y se aplasta como gelatina */
+  .orb:active { --s: 1.06; --sy: .92; color: #fff; }
+  .orb:active::after { opacity: .35; }
+  .orb:active .water { top: -12%; }
+
+  /* ---------- Interruptor líquido ---------- */
+  .toggle { display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; user-select: none; }
+  .toggle input { position: absolute; opacity: 0; pointer-events: none; }
+  .track {
+    position: relative; flex: none; width: 52px; height: 31px; border-radius: 999px; background: var(--surface-2);
+    box-shadow: inset 0 0 0 1px rgba(6,20,27,.06);
+    transition: background var(--liquid-d) var(--liquid);
+    overflow: hidden;
+  }
+  .track::before { /* la tinta que inunda */
+    content: ""; position: absolute; inset: 0; border-radius: inherit;
+    background: linear-gradient(var(--gloss-top), var(--gloss-bottom));
+    transform: scaleX(0); transform-origin: left center; opacity: 0;
+    transition: transform var(--liquid-d) var(--liquid), opacity 200ms ease;
+  }
+  .track::after { content: ""; position: absolute; inset: 1px 1px 50% 1px; border-radius: 999px; background: linear-gradient(rgba(255,255,255,.4), transparent); }
+  .knob {
+    position: absolute; top: 3.5px; left: 3.5px; width: 24px; height: 24px; border-radius: 999px; background: #fff; z-index: 1;
+    box-shadow: 0 2px 5px rgba(6,20,27,.25);
+    transition: left var(--liquid-d) var(--liquid);
+  }
+  .toggle input:checked + .track::before { transform: scaleX(1); opacity: 1; }
+  .toggle input:checked + .track .knob { left: 24.5px; }
+  .knob.stretch-r { animation: stretch-r 520ms var(--liquid); }
+  .knob.stretch-l { animation: stretch-l 520ms var(--liquid); }
+  @keyframes stretch-r { 0% { transform: scale(1,1); transform-origin: right; } 30% { transform: scale(1.42,.86); transform-origin: right; } 100% { transform: scale(1,1); transform-origin: right; } }
+  @keyframes stretch-l { 0% { transform: scale(1,1); transform-origin: left; } 30% { transform: scale(1.42,.86); transform-origin: left; } 100% { transform: scale(1,1); transform-origin: left; } }
+  .toggle input:focus-visible + .track { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+  /* ---------- Selector con gota ---------- */
+  .seg {
+    position: relative; display: inline-flex; padding: 3px; gap: 2px; border-radius: 999px;
+    background: rgba(238,238,238,.85); box-shadow: inset 0 0 0 1px rgba(6,20,27,.06);
+  }
+  .seg button {
+    position: relative; z-index: 1; appearance: none; border: 0; background: none; cursor: pointer;
+    font: 600 13.5px/1 var(--font); color: var(--ink); padding: 9px 15px; border-radius: 999px; white-space: nowrap;
+    transition: color 260ms ease; display: inline-flex; gap: 7px; align-items: center;
+  }
+  .seg button.on { color: #fff; }
+  .seg .drop {
+    position: absolute; top: 3px; bottom: 3px; left: var(--l, 3px); right: var(--r, 3px); border-radius: 999px;
+    background: linear-gradient(var(--gloss-top), var(--gloss-bottom));
+    box-shadow: 0 4px 10px rgba(6,20,27,.2), inset 0 1.5px 0 rgba(255,255,255,.22);
+    transition: left var(--liquid-d) var(--liquid), right var(--liquid-d) var(--liquid);
+  }
+
+  /* ---------- Progreso ---------- */
+  .progress { position: relative; height: 12px; border-radius: 999px; background: var(--surface-2); overflow: hidden; box-shadow: inset 0 0 0 1px rgba(6,20,27,.04); }
+  .progress .fill {
+    position: absolute; inset: 0 auto 0 0; width: var(--v, 40%); min-width: 12px; border-radius: inherit; overflow: hidden;
+    background: linear-gradient(var(--gloss-top), var(--gloss-bottom));
+    transition: width var(--melt-d) var(--melt);
+  }
+  .progress .fill::after {
+    content: ""; position: absolute; top: 0; bottom: 0; width: 90px; left: -90px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.32), transparent);
+    animation: roll 1.6s ease-in-out infinite;
+  }
+  @keyframes roll { to { left: 100%; } }
+  .progress::after { content: ""; position: absolute; inset: 1px 1px 50% 1px; border-radius: 999px; background: linear-gradient(rgba(255,255,255,.35), transparent); }
+
+  /* ---------- Chips ---------- */
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px;
+    background: rgba(255,255,255,.95); box-shadow: 0 1px 3px rgba(6,20,27,.06), inset 0 0 0 1px rgba(6,20,27,.08);
+    font-size: 12px; font-weight: 600;
+  }
+  .chip i { width: 7px; height: 7px; border-radius: 50%; background: var(--c, var(--ink)); display: inline-block; }
+
+  /* ---------- Derretir ---------- */
+  .melt-stage { position: relative; height: 210px; display: grid; place-items: center; }
+  .melt-card {
+    width: 260px; padding: 20px; border-radius: var(--r-l); background: #fff;
+    box-shadow: 0 14px 36px rgba(6,20,27,.1), inset 0 0 0 .5px rgba(6,20,27,.08);
+    transform-origin: bottom center;
+    transition: filter var(--melt-d) var(--melt), transform var(--melt-d) var(--melt), opacity var(--melt-d) var(--melt);
+  }
+  .melt-card.melted { filter: blur(22px); transform: scale(1.03, .93); opacity: 0; }
+  .melt-card.dripping { transform-origin: top center; filter: blur(10px); transform: translateY(-24px) scale(.96, 1.08); opacity: 0; transition: none; }
+
+  /* ---------- Logo ---------- */
+  .tile-dark { background: var(--ink); color: #fff; }
+  .logo-cell { display: grid; place-items: center; height: 220px; border-radius: var(--r-l); }
+  .logo-cell svg { width: 120px; height: 120px; }
+  .lockup { display: flex; align-items: center; gap: 16px; }
+  .lockup .word { font-size: 40px; font-weight: 800; letter-spacing: -.02em; }
+  .lockup.stack { flex-direction: column; gap: 10px; }
+  .lockup.stack .word { font-size: 30px; }
+  .dont { position: relative; }
+  .dont::after {
+    content: ""; position: absolute; inset: 18% 18%; border-radius: 999px;
+    background: linear-gradient(45deg, transparent calc(50% - 2px), var(--bad) calc(50% - 2px), var(--bad) calc(50% + 2px), transparent calc(50% + 2px));
+    opacity: .85;
+  }
+
+  /* ---------- Color ---------- */
+  .swatch { border-radius: var(--r-l); overflow: hidden; background: #fff; box-shadow: 0 10px 30px rgba(6,20,27,.06), inset 0 0 0 .5px rgba(6,20,27,.08); }
+  .swatch .chipcolor { height: 110px; }
+  .swatch .meta { padding: 14px 16px 16px; }
+  .swatch .meta b { display: block; font-size: 15px; }
+  .swatch .meta span { font-family: ui-monospace, Menlo, monospace; font-size: 12.5px; color: var(--ink-soft); }
+
+  /* ---------- Radios ---------- */
+  .radius-demo { display: flex; gap: 18px; align-items: flex-end; flex-wrap: wrap; }
+  .radius-demo div { background: #fff; box-shadow: inset 0 0 0 1.5px var(--ink); display: grid; place-items: center; font-size: 12px; font-weight: 700; }
+
+  /* ---------- Mock de la app ---------- */
+  .window {
+    border-radius: var(--r-xl); overflow: hidden; position: relative;
+    background: linear-gradient(#fff, var(--surface) 50%, var(--surface-2));
+    box-shadow: 0 40px 90px rgba(6,20,27,.18), inset 0 0 0 .5px rgba(6,20,27,.12);
+    height: 640px; display: flex; flex-direction: column;
+    clip-path: inset(0 round var(--r-xl)); /* WebKit no recorta los hijos con filtro solo con border-radius */
+  }
+  .window .drops i { position: absolute; border-radius: 50%; background: radial-gradient(closest-side, rgba(6,20,27,.09), transparent); filter: blur(30px); animation: drift 14s ease-in-out infinite alternate; }
+  .window .lights { position: absolute; top: 16px; left: 18px; display: flex; gap: 8px; z-index: 3; }
+  .window .lights span { width: 12px; height: 12px; border-radius: 50%; background: #d9d9d9; box-shadow: inset 0 0 0 .5px rgba(6,20,27,.15); }
+  .appbar { display: flex; align-items: center; gap: 16px; padding: 44px 28px 10px; position: relative; z-index: 2; }
+  .appbar .brand { display: flex; align-items: center; gap: 11px; }
+  .appbar .brand svg { width: 36px; height: 36px; filter: drop-shadow(0 4px 8px rgba(6,20,27,.25)); }
+  .appbar .brand b { display: block; font-size: 18px; }
+  .appbar .brand small { font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; }
+  .search { display: flex; align-items: center; gap: 8px; padding: 9px 15px; border-radius: 999px; background: rgba(255,255,255,.9); box-shadow: inset 0 0 0 1px rgba(6,20,27,.08); color: var(--ink-soft); font-size: 14px; width: 190px; }
+  .tiles { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; padding: 22px 34px; position: relative; z-index: 2; align-content: start; }
+  .gtile { cursor: pointer; text-align: center; }
+  .gtile .cover {
+    position: relative; aspect-ratio: 16/10; border-radius: var(--r-l); overflow: hidden;
+    box-shadow: 0 8px 20px rgba(6,20,27,.14), inset 0 0 0 4px #fff;
+    transform: translateY(var(--y, 0)) scale(var(--s, 1));
+    transition: transform var(--liquid-d) var(--liquid), box-shadow var(--liquid-d) var(--liquid);
+    display: grid; place-items: center; color: #fff; font-size: 34px; font-weight: 800;
+  }
+  .gtile:hover .cover { --s: 1.035; --y: -6px; box-shadow: 0 22px 40px rgba(6,20,27,.26), inset 0 0 0 4px #fff; }
+  .gtile .cover::before { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(255,255,255,.28), transparent 50%); pointer-events: none; }
+  .gtile .cover .chip { position: absolute; top: 12px; right: 12px; color: var(--ink); font-size: 11.5px; }
+  .gtile .cover .bar { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 14px; background: rgba(255,255,255,.92); color: var(--ink); font-size: 11px; font-weight: 600; text-align: left; }
+  .gtile h4 { margin: 10px 0 2px; font-size: 15px; }
+  .gtile p { margin: 0; font-size: 12px; color: var(--ink-soft); }
+  .dock { position: relative; height: 128px; z-index: 2; }
+  .dock svg.shape { position: absolute; inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 -4px 16px rgba(6,20,27,.08)); }
+  .dock .row { position: absolute; left: 30px; right: 30px; top: 46px; display: flex; gap: 14px; align-items: center; }
+  .dock .clock { position: absolute; left: 50%; top: 10px; transform: translateX(-50%); text-align: center; color: var(--ink-soft); }
+  .dock .clock b { display: block; font-size: 38px; font-weight: 300; }
+  .dock .clock span { font-size: 13px; font-weight: 500; }
+
+  /* ---------- Varios ---------- */
+  .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .say { border-radius: var(--r-m); padding: 16px 18px; background: #fff; box-shadow: inset 0 0 0 1px rgba(6,20,27,.08); }
+  .say b { display: block; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 6px; }
+  .say.yes b { color: var(--ok); } .say.no b { color: var(--bad); }
+  ul.check { padding: 0; list-style: none; margin: 0; }
+  ul.check li { padding: 8px 0 8px 30px; position: relative; line-height: 1.45; }
+  ul.check li::before { content: ""; position: absolute; left: 0; top: 10px; width: 18px; height: 18px; border-radius: 50%; background: var(--ink); box-shadow: inset 0 1px 0 rgba(255,255,255,.3); }
+  ul.check li::after { content: ""; position: absolute; left: 6px; top: 14px; width: 6px; height: 3px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(-45deg); }
+  table.tokens { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14px; }
+  table.tokens td, table.tokens th { padding: 11px 12px; text-align: left; border-bottom: 1px solid var(--line); }
+  table.tokens th { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+  footer { margin-top: 80px; text-align: center; color: var(--ink-soft); font-size: 13px; }
+
+
+  /* ================= Inicio: escenario con carrusel ================= */
+  .stage {
+    position: relative; height: 850px; border-radius: var(--r-xl); overflow: hidden; outline: none;
+    clip-path: inset(0 round var(--r-xl));
+    background: linear-gradient(180deg, #EEF2F4 0%, #CCD0CF 26%, #9BA8AB 42%, #4A5C6A 56%, #253745 68%, #11212D 82%, #06141B 100%);
+    box-shadow: 0 40px 90px rgba(6,20,27,.3);
+    user-select: none; -webkit-user-select: none;
+  }
+  .stage:focus-visible { box-shadow: 0 40px 90px rgba(6,20,27,.3), 0 0 0 3px var(--c5); }
+  .stage .lights { position: absolute; top: 16px; left: 18px; display: flex; gap: 8px; z-index: 6; }
+  .stage .lights span { width: 12px; height: 12px; border-radius: 50%; background: rgba(6,20,27,.18); }
+  .stage-bar { position: absolute; top: 40px; left: 28px; right: 28px; display: flex; align-items: center; gap: 16px; z-index: 6; }
+  .stage-bar .brand { display: flex; align-items: center; gap: 11px; flex: 1; }
+  .stage-bar .brand svg { width: 34px; height: 34px; filter: drop-shadow(0 4px 8px rgba(6,20,27,.3)); }
+  .stage-bar .brand b { display: block; font-size: 17px; }
+  .stage-bar .brand small { font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--c4); font-weight: 600; }
+  .stage-bar .icons { flex: 1; display: flex; justify-content: flex-end; gap: 8px; }
+  .icon-btn {
+    width: 38px; height: 38px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center; color: var(--c1);
+    background: rgba(255,255,255,.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    box-shadow: inset 0 0 0 1px rgba(6,20,27,.08), inset 0 1px 0 rgba(255,255,255,.8);
+    transform: scale(var(--sx,1), var(--sy,1)); transition: transform var(--ripple-d) var(--ripple);
+  }
+  .icon-btn:active { --sx: 1.08; --sy: .9; }
+  .icon-btn svg { width: 18px; height: 18px; }
+
+  /* El reloj, gigante y detrás de las portadas */
+  .bigclock {
+    position: absolute; left: 0; right: 0; top: 128px; text-align: center; z-index: 1;
+    font-size: 190px; font-weight: 200; letter-spacing: -.04em; line-height: 1; color: rgba(17,33,45,.9);
+    font-variant-numeric: tabular-nums; pointer-events: none;
+  }
+  .bigclock .d { display: inline-block; position: relative; overflow: visible; width: .6em; height: 1em; vertical-align: top; }
+  .bigclock .d.colon { width: .3em; animation: breathe 2s ease-in-out infinite; }
+  @keyframes breathe { 50% { opacity: .35; } }
+  .bigclock .d span { position: absolute; inset: 0; text-align: center; }
+  .bigclock .d span.in { animation: digit-in var(--melt-d) var(--melt) both; }
+  .bigclock .d span.out { animation: digit-out 600ms cubic-bezier(.4,0,.2,1) both; }
+  @keyframes digit-in { from { transform: translateY(.35em) scaleY(1.25); filter: blur(14px); opacity: 0; } to { transform: none; filter: blur(0); opacity: 1; } }
+  @keyframes digit-out { to { transform: translateY(-.3em) scaleY(.8); filter: blur(16px); opacity: 0; } }
+  .bigdate { position: absolute; left: 0; right: 0; top: 112px; text-align: center; z-index: 1; font-size: 15px; font-weight: 600; color: rgba(17,33,45,.7); letter-spacing: .02em; }
+
+  /* El carrusel */
+  .ring { position: absolute; left: 0; right: 0; top: 262px; height: 300px; z-index: 3; perspective: 1500px; cursor: grab; touch-action: pan-y; }
+  .ring.dragging { cursor: grabbing; }
+  .cv {
+    position: absolute; left: 50%; top: 0; width: 270px; height: 270px; margin-left: -135px;
+    transform-style: preserve-3d; will-change: transform, filter, opacity;
+    transition: transform var(--liquid-d) var(--liquid), filter var(--liquid-d) var(--liquid), opacity var(--liquid-d) var(--liquid);
+  }
+  .ring.dragging .cv { transition: none; }
+  .cv .art {
+    position: absolute; inset: 0; border-radius: 26%; overflow: hidden;
+    box-shadow: 0 30px 50px rgba(6,20,27,.45), inset 0 0 0 1px rgba(255,255,255,.12);
+  }
+  .cv .art::after { /* brillo mojado */
+    content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    background: linear-gradient(160deg, rgba(255,255,255,.34) 0%, rgba(255,255,255,.08) 32%, transparent 52%);
+  }
+  .cv .refl {
+    position: absolute; left: 0; right: 0; top: 100%; height: 100%; margin-top: 10px; border-radius: 26%; overflow: hidden;
+    transform: scaleY(-1); opacity: .32; filter: url(#ripple) blur(1px);
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,.9), transparent 55%); mask-image: linear-gradient(to top, rgba(0,0,0,.9), transparent 55%);
+    pointer-events: none;
+  }
+  .cv svg.cover { width: 100%; height: 100%; display: block; }
+
+  /* Lo que se sabe del juego enfocado: sin insignias encima de la portada */
+  .focus-info { position: absolute; left: 0; right: 0; bottom: 110px; z-index: 4; text-align: center; color: #fff; }
+  .focus-info h3 { font-size: 30px; font-weight: 800; letter-spacing: -.01em; margin: 0; min-height: 36px; }
+  .focus-info h3 .ch { display: inline-block; white-space: pre; animation: ch-in 900ms var(--reveal) both; }
+  @keyframes ch-in { from { opacity: 0; filter: blur(8px); transform: translateY(.3em); } to { opacity: 1; filter: none; transform: none; } }
+  .focus-info .meta { margin: 6px 0 0; font-size: 13.5px; color: var(--c5); min-height: 18px; }
+  .focus-info .status { margin: 10px auto 0; font-size: 13px; font-weight: 600; color: var(--c6); display: inline-flex; align-items: center; gap: 8px; min-height: 18px; }
+  .focus-info .status i { width: 7px; height: 7px; border-radius: 50%; background: var(--dot, var(--c5)); box-shadow: 0 0 10px var(--dot, transparent); }
+  .focus-info .bar { width: 240px; margin: 10px auto 0; }
+  .focus-info .bar .progress { background: rgba(255,255,255,.12); box-shadow: none; height: 8px; }
+  .focus-info .bar .progress .fill { background: linear-gradient(90deg, var(--c5), #fff); }
+  .focus-info .actions { margin-top: 18px; display: flex; gap: 10px; justify-content: center; }
+  .pill.light { color: var(--c1); background: linear-gradient(#fff, #E3E7E8); box-shadow: 0 10px 24px rgba(0,0,0,.35), inset 0 1.5px 0 #fff; }
+  .pill.ghost { color: #fff; background: rgba(255,255,255,.08); box-shadow: inset 0 0 0 1px rgba(255,255,255,.16), inset 0 1px 0 rgba(255,255,255,.12); backdrop-filter: blur(10px); }
+  .swap { animation: swap-in var(--melt-d) var(--melt) both; }
+  @keyframes swap-in { from { opacity: 0; filter: blur(8px); transform: translateY(6px); } to { opacity: 1; filter: none; transform: none; } }
+
+  /* Indicador: la gota activa se estira */
+  .dots { position: absolute; left: 0; right: 0; bottom: 80px; z-index: 4; display: flex; gap: 6px; justify-content: center; }
+  .dots b { width: 6px; height: 6px; border-radius: 999px; background: rgba(255,255,255,.25); transition: width var(--liquid-d) var(--liquid), background 300ms; cursor: pointer; }
+  .dots b.on { width: 22px; background: #fff; }
+
+  /* Barra inferior: botones redondos de cristal, sin hover */
+  .stage-dock { position: absolute; left: 0; right: 0; bottom: 14px; z-index: 5; display: flex; justify-content: center; gap: 10px; }
+  .stage-dock .icon-btn { width: 40px; height: 40px; color: var(--c6); background: rgba(255,255,255,.07); box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), inset 0 1px 0 rgba(255,255,255,.1); }
+  .stage-hint { position: absolute; right: 24px; bottom: 22px; z-index: 5; font-size: 11.5px; color: var(--c4); }
+
+
+  /* Isla: una cápsula que se transforma para contar lo que pasa (idea de bencho.dev, resorte 380/34) */
+  .island {
+    position: absolute; left: 50%; top: 38px; z-index: 7; transform: translateX(-50%);
+    height: 40px; min-width: 40px; border-radius: 999px; color: #fff; overflow: hidden; cursor: pointer;
+    background: linear-gradient(#1A2D3B, #06141B);
+    box-shadow: 0 10px 30px rgba(6,20,27,.35), inset 0 1px 0 rgba(255,255,255,.14);
+    transition: width var(--liquid-d) var(--liquid), height var(--liquid-d) var(--liquid);
+  }
+  .island .face > * { flex: none; }
+  .island .face { position: absolute; inset: 0; display: flex; align-items: center; gap: 10px; padding: 0 16px; white-space: nowrap; font-size: 13px; font-weight: 600; }
+  .island .face.in { animation: face-in var(--t-slow) var(--out) both; }
+  .island .face.out { animation: face-out var(--t-base) ease both; }
+  @keyframes face-in { from { opacity: 0; transform: scale(.92); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+  @keyframes face-out { to { opacity: 0; transform: scale(.92); filter: blur(6px); } }
+  .island .mini { width: 90px; height: 5px; border-radius: 999px; background: rgba(255,255,255,.15); overflow: hidden; }
+  .island .mini b { display: block; height: 100%; width: var(--v, 0%); border-radius: inherit; background: linear-gradient(90deg, var(--c5), #fff); transition: width var(--melt-d) var(--melt); }
+
+  /* Texto con brillo que lo recorre (shimmer de bencho.dev) */
+  .shimmer {
+    background: linear-gradient(100deg, currentColor 40%, #fff 50%, currentColor 60%) 0 0 / 400% 100%;
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    animation: shimmer 2s linear infinite;
+  }
+  @keyframes shimmer { from { background-position: 100% 0; } to { background-position: 0 0; } }
+
+  /* Indicador gooey: la gota activa se despega y se funde con la siguiente */
+  .dots { filter: url(#goo); }
+  .dots b { width: 7px; height: 7px; background: var(--c4); }
+  .dots .blob { position: absolute; top: 0; height: 7px; width: 22px; border-radius: 999px; background: #fff; left: var(--x, 0); transition: left var(--liquid-d) var(--liquid); }
+  .dots-wrap { position: relative; display: flex; gap: 8px; }
+
+  /* Las portadas entran en cascada (bencho: 700 ms, retraso .44 s + 70 ms por portada, máximo 9) */
+  .stage:not(.shown) .cv .art, .stage:not(.shown) .cv .refl { opacity: 0; transform: translateY(16px); }
+  .stage.shown .cv .art, .stage.shown .cv .refl { transition: opacity 700ms var(--out), transform 700ms var(--out); transition-delay: calc(.44s + var(--k) * 70ms); }
+  .stage.shown .cv .refl { transform: scaleY(-1); }
+  .stage:not(.shown) .cv .refl { transform: scaleY(-1) translateY(16px); }
+
+  /* Fila inferior */
+  .stage-dock { align-items: center; gap: 10px; }
+  .stage-dock .seg { background: rgba(255,255,255,.07); box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); }
+  .stage-dock .seg button { color: var(--c6); }
+  .stage-dock .seg button.on { color: var(--c1); }
+  .stage-dock .seg .drop { background: linear-gradient(#fff, #E3E7E8); box-shadow: 0 4px 12px rgba(0,0,0,.3), inset 0 1px 0 #fff; }
+
+  /* Pila de avisos: se abre en lista al hacer clic (bencho: escala 1 − d·0,05) */
+  .toasts { position: relative; height: 150px; width: 320px; margin: 10px auto 0; cursor: pointer; }
+  .toast {
+    position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 14px; border-radius: 18px; background: #fff; display: flex; gap: 10px; align-items: center;
+    box-shadow: 0 10px 30px rgba(6,20,27,.12), inset 0 0 0 .5px rgba(6,20,27,.08); font-size: 13px;
+    transform: translateY(calc(var(--d) * -10px)) scale(calc(1 - var(--d) * .05)); opacity: calc(1 - var(--d) * .25);
+    transition: transform var(--liquid-d) var(--liquid), opacity var(--t-slow) var(--out);
+  }
+  .toasts.open .toast { transform: translateY(calc(var(--d) * -56px)); opacity: 1; }
+  .toast svg { width: 28px; height: 28px; flex: none; }
+  .reveal-demo { font-size: 34px; font-weight: 800; letter-spacing: -.02em; min-height: 44px; }
+  .reveal-demo .w { display: inline-block; white-space: nowrap; animation: ch-in 900ms var(--reveal) both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; }
+  }
+</style>
+</head>
+<body>
+<div class="ink-drops"><i></i><i></i><i></i></div>
+
+<nav class="toc">
+  <a href="#inicio">Inicio</a><a href="#logo">Logo</a><a href="#color">Color</a><a href="#tipo">Tipografía</a>
+  <a href="#forma">Forma</a><a href="#movimiento">Movimiento</a><a href="#inspiracion">Inspiración</a><a href="#componentes">Componentes</a>
+  <a href="#interfaz">Interfaz</a><a href="#voz">Voz</a><a href="#legal">Open source</a>
+</nav>
+
+<main>
+  <!-- ================= INICIO ================= -->
+  <section id="inicio" class="hero">
+    <div class="mark-wrap"><svg class="logo live" viewBox="0 0 100 100" data-variant="black"></svg></div>
+    <div>
+      <p class="eyebrow">Brand kit</p>
+      <h1><span class="brand-name">Ondi</span></h1>
+      <p class="tag">Tus juegos, en tu Mac. Una biblioteca open source en azul medianoche, donde todo es redondo y todo se mueve como agua.</p>
+      <div class="name-pick" id="namePick">
+        
+      </div>
+      <p class="note">Ondi viene de <i>onda</i>: la onda que atraviesa el logo y el agua sobre la que flotan los juegos. Corto, suave y sin referencias a marcas de consolas.</p>
+    </div>
+  </section>
+
+  <!-- ================= PRINCIPIOS ================= -->
+  <section>
+    <p class="eyebrow">Concepto</p>
+    <h2>Agua a medianoche</h2>
+    <p class="lead">Cuatro reglas que deciden cualquier duda de diseño.</p>
+    <div class="grid g4">
+      <div class="glass"><h3>Redondo siempre</h3><p class="muted small">Ninguna esquina viva. Las formas grandes son squircles (superelipses), las pequeñas son cápsulas o círculos.</p></div>
+      <div class="glass"><h3>Líquido</h3><p class="muted small">Nada aparece ni desaparece de golpe: fluye, se estira como una gota y se asienta con un rebote suave.</p></div>
+      <div class="glass"><h3>Un solo azul</h3><p class="muted small">Seis tonos de azul pizarra y blanco. Otros colores solo aparecen para avisar de un estado: listo, cuidado o error.</p></div>
+      <div class="glass"><h3>Honesto</h3><p class="muted small">Open source y legal: la app nunca trae ni descarga claves ni juegos. Cada persona usa sus propias copias.</p></div>
+    </div>
+  </section>
+
+  <!-- ================= LOGO ================= -->
+  <section id="logo">
+    <p class="eyebrow">Logo</p>
+    <h2>Un squircle con una onda</h2>
+    <p class="lead">Un cuadrado tan suave que no tiene esquinas, atravesado por una sola onda: la superficie del agua. La onda es lo único que nunca cambia.</p>
+
+    <div class="grid g4">
+      <div class="logo-cell glass"><svg class="logo" viewBox="0 0 100 100" data-variant="black"></svg></div>
+      <div class="logo-cell tile-dark" style="box-shadow:0 14px 40px rgba(6,20,27,.2)"><svg class="logo" viewBox="0 0 100 100" data-variant="white"></svg></div>
+      <div class="logo-cell glass"><svg class="logo" viewBox="0 0 100 100" data-variant="outline"></svg></div>
+      <div class="logo-cell glass"><img src="app-icon-512.png" alt="Ícono de la app" style="width:150px;height:150px"></div>
+    </div>
+    <div class="grid g4" style="margin-top:10px">
+      <p class="small muted">Principal: medianoche sobre claro.</p>
+      <p class="small muted">Invertido: sobre fondos oscuros.</p>
+      <p class="small muted">Contorno: grabados, una sola tinta.</p>
+      <p class="small muted">Ícono de macOS: medianoche brillante, con reflejo.</p>
+    </div>
+
+    <div class="grid g2" style="margin-top:28px">
+      <div class="glass" style="display:grid;place-items:center;height:220px">
+        <div class="lockup"><svg class="logo" viewBox="0 0 100 100" data-variant="black" style="width:72px;height:72px"></svg><span class="word brand-name">Ondi</span></div>
+      </div>
+      <div class="glass tile-dark" style="display:grid;place-items:center;height:220px;background:var(--ink)">
+        <div class="lockup stack"><svg class="logo" viewBox="0 0 100 100" data-variant="white" style="width:72px;height:72px"></svg><span class="word brand-name">Ondi</span></div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:28px">
+      <div class="glass">
+        <h3>Construcción</h3>
+        <svg id="construction" viewBox="-12 -12 124 124" style="width:100%;max-width:420px;display:block;margin:6px auto"></svg>
+        <p class="small muted">Contorno: superelipse |x|⁴ + |y|⁴ = 1. Onda: un período de seno que empieza al 21,5 % del lado, sube y baja un 8,8 % y tiene un grosor del 11,8 %, con puntas redondas. Son los mismos números que usarían la app y el generador del ícono (<code>LogoGeometry.swift</code>).</p>
+      </div>
+      <div class="glass">
+        <h3>Espacio y tamaños</h3>
+        <div style="display:flex;gap:28px;align-items:center;justify-content:center;padding:18px 0">
+          <div style="padding:22px;border-radius:24px;outline:1.5px dashed var(--ink-soft);outline-offset:-1px"><svg class="logo" viewBox="0 0 100 100" data-variant="black" style="width:88px;height:88px;display:block"></svg></div>
+          <div style="display:flex;gap:14px;align-items:flex-end">
+            <svg class="logo" viewBox="0 0 100 100" data-variant="flat" style="width:48px;height:48px"></svg>
+            <svg class="logo" viewBox="0 0 100 100" data-variant="flat" style="width:32px;height:32px"></svg>
+            <svg class="logo" viewBox="0 0 100 100" data-variant="flat" style="width:24px;height:24px"></svg>
+            <svg class="logo" viewBox="0 0 100 100" data-variant="flat" style="width:16px;height:16px"></svg>
+          </div>
+        </div>
+        <p class="small muted">Deja libre alrededor al menos un cuarto del lado (línea punteada). Mínimo 24 px en pantalla; por debajo, 16 px con la versión plana, sin brillo ni reflejo.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:36px">Usos incorrectos</h3>
+    <div class="grid g4">
+      <div class="glass dont" style="display:grid;place-items:center;height:170px"><svg class="logo" viewBox="0 0 100 100" data-variant="black" style="width:90px;height:90px;transform:rotate(18deg)"></svg></div>
+      <div class="glass dont" style="display:grid;place-items:center;height:170px"><svg class="logo" viewBox="0 0 100 100" data-variant="color" style="width:90px;height:90px"></svg></div>
+      <div class="glass dont" style="display:grid;place-items:center;height:170px"><svg class="logo" viewBox="0 0 100 100" data-variant="square" style="width:90px;height:90px"></svg></div>
+      <div class="glass dont" style="display:grid;place-items:center;height:170px"><svg class="logo" viewBox="0 0 100 100" data-variant="black" style="width:120px;height:70px" preserveAspectRatio="none"></svg></div>
+    </div>
+    <div class="grid g4" style="margin-top:8px">
+      <p class="small muted">No girarlo.</p><p class="small muted">No ponerle color.</p><p class="small muted">No volverlo cuadrado.</p><p class="small muted">No estirarlo.</p>
+    </div>
+  </section>
+
+  <!-- ================= COLOR ================= -->
+  <section id="color">
+    <p class="eyebrow">Color</p>
+    <h2>De medianoche a niebla</h2>
+    <p class="lead">Seis tonos de un mismo azul pizarra, como mirar el agua de la superficie al fondo. El más oscuro es el del logo y el texto; los claros son superficies y cristal. Paleta inspirada en @uiuxaadi.</p>
+    <div class="grid g3">
+      <div class="swatch"><div class="chipcolor" style="background:var(--c1)"></div><div class="meta"><b>Medianoche</b><span>#06141B · logo, texto, acción</span></div></div>
+      <div class="swatch"><div class="chipcolor" style="background:var(--c2)"></div><div class="meta"><b>Abismo</b><span>#11212D · superficies oscuras</span></div></div>
+      <div class="swatch"><div class="chipcolor" style="background:var(--c3)"></div><div class="meta"><b>Pizarra</b><span>#253745 · brillo de botones, capas</span></div></div>
+      <div class="swatch"><div class="chipcolor" style="background:var(--c4)"></div><div class="meta"><b>Acero</b><span>#4A5C6A · texto secundario</span></div></div>
+      <div class="swatch"><div class="chipcolor" style="background:var(--c5)"></div><div class="meta"><b>Bruma</b><span>#9BA8AB · iconos apagados, rieles</span></div></div>
+      <div class="swatch"><div class="chipcolor" style="background:var(--c6)"></div><div class="meta"><b>Niebla</b><span>#CCD0CF · bordes, separadores</span></div></div>
+    </div>
+    <div class="swatch" style="margin-top:18px"><div class="chipcolor" style="height:90px;background:linear-gradient(90deg,#fff,var(--c6),var(--c5),var(--c4),var(--c3),var(--c2),var(--c1))"></div><div class="meta"><b>La profundidad</b><span>blanco → niebla → bruma → acero → pizarra → abismo → medianoche · fondos de escenario</span></div></div>
+    <h3 style="margin-top:32px">Colores de estado</h3>
+    <p class="small muted" style="margin-top:0">Solo en iconos y puntos de estado, nunca como decoración ni en fondos grandes.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <span class="chip" style="--c:var(--ok)"><i></i>Listo · #3E8E73</span>
+      <span class="chip" style="--c:var(--warn)"><i></i>Cuidado · #C9A15B</span>
+      <span class="chip" style="--c:var(--bad)"><i></i>Error · #C2584E</span>
+    </div>
+  </section>
+
+  <!-- ================= TIPOGRAFÍA ================= -->
+  <section id="tipo">
+    <p class="eyebrow">Tipografía</p>
+    <h2>SF Pro Rounded</h2>
+    <p class="lead">La letra del sistema en su versión redondeada: viene con macOS, no hay que licenciarla y combina con la forma del logo. En la web: <code>ui-rounded</code>.</p>
+    <div class="glass">
+      <table class="tokens">
+        <tr><th>Estilo</th><th>Muestra</th><th>Tamaño / peso</th></tr>
+        <tr><td>Display</td><td style="font-size:34px;font-weight:800;letter-spacing:-.02em">Tu biblioteca</td><td>34 · Heavy</td></tr>
+        <tr><td>Título</td><td style="font-size:24px;font-weight:700">Listo para jugar</td><td>24 · Bold</td></tr>
+        <tr><td>Encabezado</td><td style="font-size:18px;font-weight:600">Calidad y FPS</td><td>18 · Semibold</td></tr>
+        <tr><td>Cuerpo</td><td style="font-size:14px">Agrega la actualización probada para jugar a 60 fps.</td><td>14 · Regular</td></tr>
+        <tr><td>Pie</td><td style="font-size:12px;color:var(--ink-soft)">Se guarda en la app del juego.</td><td>12 · Regular</td></tr>
+        <tr><td>Etiqueta</td><td style="font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)">Mandos conectados</td><td>10,5 · Semibold · mayúsculas</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= FORMA ================= -->
+  <section id="forma">
+    <p class="eyebrow">Forma</p>
+    <h2>Nada con esquinas</h2>
+    <p class="lead">Cuatro radios y la cápsula. Siempre esquinas “continuas” (la curva entra suave, como en los íconos de Apple), nunca un arco pegado a una recta.</p>
+    <div class="glass radius-demo">
+      <div style="width:70px;height:70px;border-radius:14px">14</div>
+      <div style="width:100px;height:100px;border-radius:20px">20</div>
+      <div style="width:140px;height:140px;border-radius:28px">28</div>
+      <div style="width:180px;height:180px;border-radius:36px">36</div>
+      <div style="width:200px;height:56px;border-radius:999px">Cápsula</div>
+      <div style="width:76px;height:76px;border-radius:50%">Círculo</div>
+    </div>
+    <p class="small muted">S 14: teclas, miniaturas · M 20: tarjetas internas · L 28: paneles de cristal, portadas · XL 36: ventanas y hojas · Cápsula: botones, chips, selectores, barras.</p>
+  </section>
+
+  <!-- ================= MOVIMIENTO ================= -->
+  <section id="movimiento">
+    <p class="eyebrow">Movimiento</p>
+    <h2>Como agua, como algo que se derrite</h2>
+    <p class="lead">Todo se mueve con resortes, nunca a velocidad constante: arranca con impulso, se pasa un poquito y se asienta despacio. Estas curvas son resortes reales calculados con los mismos números que usaría SwiftUI.</p>
+    <div class="grid g3">
+      <div class="glass">
+        <h3>Líquido</h3>
+        <p class="small muted">Respuesta 0,52 s · amortiguación 0,74. Lo de todos los días: seleccionar, interruptores, pestañas, pasar el ratón.</p>
+        <div class="seg" data-seg style="margin-top:8px"><span class="drop"></span><button class="on">Todos</button><button>Favoritos</button><button>Listos</button></div>
+      </div>
+      <div class="glass">
+        <h3>Derretir</h3>
+        <p class="small muted">Respuesta 0,78 s · amortiguación 0,88. Para lo grande que entra o sale: se desenfoca, se hunde hacia abajo y se desvanece.</p>
+        <button class="pill" id="meltBtn" style="margin-top:8px">Derretir la tarjeta</button>
+      </div>
+      <div class="glass">
+        <h3>Gelatina</h3>
+        <p class="small muted">Respuesta 0,30 s · amortiguación 0,55. Al pulsar: el botón se aplasta y rebota, como al tocar gelatina.</p>
+        <button class="pill prominent" style="margin-top:8px">Mantén pulsado</button>
+      </div>
+    </div>
+    <div class="glass" style="margin-top:18px">
+      <div class="melt-stage">
+        <div class="melt-card" id="meltCard">
+          <div style="display:flex;gap:12px;align-items:center">
+            <svg class="logo" viewBox="0 0 100 100" data-variant="black" style="width:44px;height:44px"></svg>
+            <div><b>Compilación lista</b><div class="small muted">Ya puedes jugar.</div></div>
+          </div>
+          <div class="progress" style="margin-top:16px;--v:100%"><div class="fill"></div></div>
+        </div>
+      </div>
+      <p class="small muted" style="text-align:center;margin:0">Al volver, entra “goteando”: cae desde un poco más arriba, estirada, y se asienta.</p>
+    </div>
+    <h3 style="margin-top:32px">Reglas</h3>
+    <ul class="check">
+      <li>Nada se mueve en línea recta ni a velocidad constante, salvo lo que fluye siempre (el brillo de una barra de progreso).</li>
+      <li>Al moverse rápido, las cosas se estiran en la dirección del movimiento y se recuperan al llegar, como una gota.</li>
+      <li>Lo que sale se derrite (desenfoque y caída). Lo que entra gotea. No hay cortes secos.</li>
+      <li>El fondo respira: manchas de tinta que derivan cada 16 segundos, casi imperceptibles.</li>
+      <li>Si el Mac tiene activado “Reducir movimiento”, todo se queda quieto y solo cambia la opacidad.</li>
+    </ul>
+  </section>
+
+  <!-- ================= INSPIRACIÓN ================= -->
+  <section id="inspiracion">
+    <p class="eyebrow">Inspiración y librerías</p>
+    <h2>De dónde sale el movimiento</h2>
+    <p class="lead">Lo que tomé de bencho.dev y las librerías que encajan con la app de Mac. Todo es open source y está mantenido; lo verifiqué el 3 de noviembre de 2026.</p>
+    <div class="grid g2">
+      <div class="glass">
+        <h3>bencho.dev, adoptado en este kit</h3>
+        <p class="small muted" style="margin-top:0">Es una librería de componentes React de Lorenzo Cabra con código MIT en <a href="https://github.com/cabralorenzo/bencho" style="color:inherit">github.com/cabralorenzo/bencho</a>. Los valores salen de su código.</p>
+        <ul class="check small">
+          <li><b>Curvas:</b> asentar <code>.22,1,.36,1</code> · aparecer con rebote <code>.24,1.34,.38,1</code> · revelar texto <code>.16,1,.3,1</code>.</li>
+          <li><b>Resortes:</b> 380 / 34 para la interfaz, 500 / 18 para lo juguetón. <b>Tiempos:</b> 160 · 220 · 420 · 600 ms.</li>
+          <li><b>Cristal:</b> blanco al 35–60 %, desenfoque 25 px, saturación 190 %, línea de luz arriba y borde con degradado a 142°.</li>
+          <li><b>Texto que aparece:</b> desenfoque 8 px → nítido, sube .3 em, 900 ms. <b>Cascada:</b> 70 ms entre elementos, máximo 9.</li>
+          <li><b>Isla que se transforma</b>, <b>avisos apilados</b>, <b>brillo en el texto</b> y <b>gooey</b> para las gotas que se funden.</li>
+          <li>Lo que <b>no</b> tomé: los efectos al pasar el ratón (botones magnéticos, dock que se agranda), porque no te gustan.</li>
+        </ul>
+      </div>
+      <div class="glass">
+        <h3>Para la app de Mac (SwiftUI)</h3>
+        <table class="tokens small">
+          <tr><th>Librería</th><th>Para qué</th></tr>
+          <tr><td><a href="https://github.com/twostraws/Inferno" style="color:inherit"><b>Inferno</b></a> · MIT</td><td>Shaders de agua y ondas, brillo, transiciones que deforman. La más “acuosa”.</td></tr>
+          <tr><td><a href="https://github.com/EmergeTools/Pow" style="color:inherit"><b>Pow</b></a> · MIT</td><td>Destellos glossy al cambiar algo, entradas suaves (Glare, Shine, Pop).</td></tr>
+          <tr><td><a href="https://github.com/twostraws/Vortex" style="color:inherit"><b>Vortex</b></a> · MIT</td><td>Partículas sutiles: luciérnagas detrás del carrusel, salpicadura al pulsar Jugar.</td></tr>
+          <tr><td><a href="https://github.com/frzi/swiftui-doomwipe" style="color:inherit"><b>doomwipe</b></a> · MIT</td><td>Una transición que literalmente se derrite (con gotas suavizadas).</td></tr>
+          <tr><td><b>SwiftUI nativo</b></td><td><code>scrollTransition</code> y <code>rotation3DEffect</code> para el carrusel, metaballs con <code>Canvas</code>, resortes <code>.smooth</code>, <code>keyframeAnimator</code>.</td></tr>
+        </table>
+        <p class="small muted">Nota técnica: si se agrega una librería con shaders, <code>make_app.sh</code> necesita copiar sus recursos, o la app se cierra al abrir. Ya está identificado.</p>
+      </div>
+      <div class="glass">
+        <h3>Ideas destacadas para adaptar</h3>
+        <ul class="check small">
+          <li><a href="https://tympanus.net/codrops/2025/11/11/building-a-3d-infinite-carousel-with-reactive-background-gradients/" style="color:inherit"><b>Carrusel 3D con fondo que toma el color de la portada</b></a> (Codrops, 2025): el escenario se tiñe con cada juego.</li>
+          <li><a href="https://tympanus.net/codrops/2017/10/10/liquid-distortion-effects/" style="color:inherit"><b>Transición de distorsión líquida</b></a> (Codrops): al cambiar de juego, la portada se ondula como agua.</li>
+          <li><a href="https://kube.io/blog/liquid-glass-css-svg" style="color:inherit"><b>Liquid Glass en la web</b></a> (kube.io): refracción real para botones de cristal.</li>
+          <li><b>Reloj gooey</b> (Alvaro Montoro, CodePen 2025): números que se funden como líquido.</li>
+          <li><a href="https://gist.github.com/twostraws/cefe067d5e60366f1d00b93e6b24603b" style="color:inherit"><b>“iBeer” líquido</b></a> (Paul Hudson): una pantalla de carga que se derrite.</li>
+          <li><b>Ondas brillantes con Metal</b> (r/SwiftUI, 186 votos): una aurora lenta de pizarra detrás del inicio.</li>
+        </ul>
+        <p class="small muted">En TikTok casi no hay material indexable con código; lo mejor salió de Codrops, CodePen, Reddit y gists.</p>
+      </div>
+      <div class="glass">
+        <h3>Para la web y este kit</h3>
+        <ul class="check small">
+          <li><a href="https://gsap.com" style="color:inherit"><b>GSAP</b></a>: gratis con todos sus plugins desde 2025 (deformar formas, separar texto, arrastrar con inercia).</li>
+          <li><a href="https://motion.dev" style="color:inherit"><b>Motion</b></a> (MIT): resortes de verdad en JavaScript.</li>
+          <li><a href="https://github.com/darkroomengineering/lenis" style="color:inherit"><b>Lenis</b></a> (MIT): desplazamiento de página mantequilla.</li>
+          <li><a href="https://www.embla-carousel.com" style="color:inherit"><b>Embla</b></a> / <a href="https://swiperjs.com" style="color:inherit"><b>Swiper</b></a> (MIT): base para carruseles.</li>
+          <li><a href="https://shaders.paper.design" style="color:inherit"><b>Paper Shaders</b></a>: degradados de malla, metal líquido, agua.</li>
+        </ul>
+        <p class="small muted">Este kit no usa ninguna: todo está hecho a mano para que sea un solo archivo, sin instalar nada.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COMPONENTES ================= -->
+  <section id="componentes">
+    <p class="eyebrow">Componentes</p>
+    <h2>Pruébalos</h2>
+    <p class="lead">Haz clic y mantén pulsado. Los botones no reaccionan al pasar el ratón: solo cuando los tocas.</p>
+    <div class="grid g2">
+      <div class="glass">
+        <h3>Botones</h3>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:14px 0 20px">
+          <button class="pill prominent large">▶︎ Jugar</button>
+          <button class="pill large">Recompilar</button>
+          <button class="pill">Ver registro</button>
+        </div>
+        <h3>Orbes: mantén pulsado y se llenan de agua</h3>
+        <div style="display:flex;gap:14px;margin-top:14px" id="orbs"></div>
+      </div>
+      <div class="glass">
+        <h3>Interruptores</h3>
+        <label class="toggle" style="margin:14px 0"><span><b style="font-size:14px">Mostrar FPS en esta partida</b><br><span class="small muted">El contador de Apple, solo para el próximo inicio.</span></span><input type="checkbox" checked><span class="track"><span class="knob"></span></span></label>
+        <label class="toggle" style="margin:14px 0"><span><b style="font-size:14px">El teclado es el jugador 1</b><br><span class="small muted">Los mandos pasan a jugador 2, 3…</span></span><input type="checkbox"><span class="track"><span class="knob"></span></span></label>
+        <h3 style="margin-top:22px">Selector</h3>
+        <div class="seg" data-seg><span class="drop"></span><button class="on">30 fps</button><button>60 fps</button></div>
+        <div class="seg" data-seg style="margin-left:10px"><span class="drop"></span><button>Dock (TV)</button><button class="on">Portátil</button></div>
+      </div>
+      <div class="glass">
+        <h3>Progreso</h3>
+        <p class="small muted" style="margin-top:0">Se llena como un tubo de agua; un brillo recorre lo hecho.</p>
+        <div class="progress" id="prog" style="--v:38%"><div class="fill"></div></div>
+        <div style="display:flex;justify-content:space-between;margin-top:10px" class="small muted"><span id="progLabel">Etapa 4 de 9 · Traduciendo shaders</span><button class="pill" id="progBtn">Avanzar</button></div>
+      </div>
+      <div class="glass">
+        <h3>Texto que aparece desde el desenfoque</h3>
+        <p class="small muted" style="margin-top:0">Palabra por palabra: 900 ms, desenfoque de 8 px que se aclara mientras sube .3 em (receta de bencho.dev).</p>
+        <div class="reveal-demo" id="revealDemo"></div>
+        <button class="pill" id="revealBtn" style="margin-top:8px">Repetir</button>
+        <p class="small muted" style="margin:18px 0 4px"><span class="shimmer" style="color:var(--c4);font-weight:700">Compilando shaders…</span> · el brillo recorre el texto mientras algo trabaja.</p>
+      </div>
+      <div class="glass">
+        <h3>Avisos apilados</h3>
+        <p class="small muted" style="margin-top:0">Se apilan detrás del más nuevo. Haz clic y se abren en lista, con resorte.</p>
+        <div class="toasts" id="toasts">
+          <div class="toast" style="--d:2"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="var(--c5)"/></svg><span><b>Copia de seguridad</b><br><span class="muted">Partida guardada</span></span></div>
+          <div class="toast" style="--d:1"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="var(--warn)"/></svg><span><b>Compilando Aventura</b><br><span class="muted">Etapa 6 de 9</span></span></div>
+          <div class="toast" style="--d:0"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="var(--ok)"/><path d="m7.5 12.3 3 3 6-6.3" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Tu juego está listo</b><br><span class="muted">Pulsa para jugar</span></span></div>
+        </div>
+      </div>
+      <div class="glass">
+        <h3>Estados</h3>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+          <span class="chip" style="--c:var(--ok)"><i></i>Listo</span>
+          <span class="chip" style="--c:var(--ok)"><i></i>Verificado</span>
+          <span class="chip" style="--c:var(--warn)"><i></i>Compilando</span>
+          <span class="chip" style="--c:var(--bad)"><i></i>Error</span>
+          <span class="chip"><i></i>Por compilar</span>
+        </div>
+        <h3 style="margin-top:22px">Pestañas</h3>
+        <div class="seg" data-seg><span class="drop"></span><button class="on">Resumen</button><button>Calidad y FPS</button><button>Controles</button><button>Partidas</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INTERFAZ ================= -->
+  <section id="interfaz">
+    <p class="eyebrow">Interfaz</p>
+    <h2>El inicio, desde cero</h2>
+    <p class="lead">Un juego a la vez, pero ves los vecinos. Las portadas cuadradas giran de lado a lado sobre un piso de agua que las refleja, y la hora queda grande, detrás, como en la pantalla bloqueada del iPhone. Sin insignias sobre las portadas: el estado se lee abajo. Arrastra, desliza con dos dedos, usa ← → o haz clic en una portada. Arriba, la isla cuenta lo que está pasando (haz clic para ver sus estados).</p>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <filter id="ripple" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.09" numOctaves="2" seed="4" result="n">
+          <animate attributeName="baseFrequency" dur="9s" values="0.012 0.09;0.016 0.12;0.012 0.09" repeatCount="indefinite"/>
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="2.4" result="b"/><feColorMatrix in="b" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/></filter>
+    </svg>
+    <div class="stage" id="stage" tabindex="0" aria-label="Biblioteca de juegos. Usa las flechas para cambiar de juego.">
+      <div class="lights"><span></span><span></span><span></span></div>
+      <div class="stage-bar">
+        <div class="brand"><svg class="logo live" viewBox="0 0 100 100" data-variant="black"></svg><div><b class="brand-name">Ondi</b><small id="stageCount">7 juegos · 4 listos</small></div></div>
+        <div class="icons">
+          <button class="icon-btn" aria-label="Buscar"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m16 16 4 4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+          <button class="icon-btn" aria-label="Agregar juegos"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+        </div>
+      </div>
+      <div class="island" id="island" title="Clic: ver cómo cambia" role="status"></div>
+      <div class="bigclock" id="bigclock" aria-hidden="true"></div>
+      <div class="bigdate" id="bigdate"></div>
+      <div class="ring" id="ring"></div>
+      <div class="focus-info" aria-live="polite">
+        <h3 id="gName"></h3>
+        <p class="meta" id="gMeta"></p>
+        <div id="gStatus"></div>
+        <div class="actions" id="gActions"></div>
+      </div>
+      <div class="dots" id="dots"></div>
+      <div class="stage-dock" id="stageDock"></div>
+    </div>
+  </section>
+
+  <!-- ================= VOZ ================= -->
+  <section id="voz">
+    <p class="eyebrow">Voz</p>
+    <h2>Habla como un amigo que sabe</h2>
+    <p class="lead">Tú, frases cortas, sin tecnicismos de entrada. Primero qué pasa, después qué hacer. Lo técnico va en “Ver registro”.</p>
+    <div class="do-dont">
+      <div class="say yes"><b>Así</b>Este juego se compiló antes de que existieran tus teclas. Recompílalo una vez: los shaders se reutilizan.</div>
+      <div class="say no"><b>Así no</b>Error: el binario dmhost no exporta DM_KEYMAP. Ejecute build_ipa_from_nsp.py nuevamente.</div>
+      <div class="say yes"><b>Así</b>Falta la actualización probada. Sin ella el juego puede no arrancar.</div>
+      <div class="say no"><b>Así no</b>¡Ups! 😅 Algo salió mal…</div>
+    </div>
+  </section>
+
+  <!-- ================= LEGAL ================= -->
+  <section id="legal">
+    <p class="eyebrow">Open source</p>
+    <h2>Tus juegos, tus claves</h2>
+    <p class="lead">La marca deja claro que es una herramienta para usar tus propias copias, de forma legal.</p>
+    <div class="grid g2">
+      <div class="glass">
+        <h3>Lo que el proyecto nunca hace</h3>
+        <ul class="check">
+          <li>No incluye, descarga ni enlaza claves (<code>prod.keys</code>), firmware ni juegos.</li>
+          <li>No usa logos, tipografías ni la silueta de la consola de Nintendo, ni arte de juegos en su material.</li>
+          <li>No promete compatibilidad con títulos concretos en su publicidad.</li>
+        </ul>
+      </div>
+      <div class="glass">
+        <h3>Aviso para el README</h3>
+        <p class="small" style="margin-top:0">Este proyecto es una interfaz para nxnative y no está afiliado a Nintendo. No incluye ni distribuye juegos, claves ni firmware. Para usarlo necesitas extraer tus propios juegos y claves de una consola que te pertenezca. Nintendo Switch es una marca de Nintendo.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer><span class="brand-name">Ondi</span> · brand kit</footer>
+</main>
+
+<script>
+/* ---------- Resortes reales: misma física que SwiftUI .spring(response:dampingFraction:) ---------- */
+function spring(response, damping) {
+  const w0 = 2 * Math.PI / response, z = damping;
+  const x = z < 1
+    ? t => { const wd = w0 * Math.sqrt(1 - z * z); return 1 - Math.exp(-z * w0 * t) * (Math.cos(wd * t) + (z * w0 / wd) * Math.sin(wd * t)); }
+    : t => 1 - Math.exp(-w0 * t) * (1 + w0 * t);
+  let end = 0;
+  for (let t = 0; t < 4; t += 0.005) if (Math.abs(1 - x(t)) > 0.002) end = t;
+  end += 0.01;
+  const pts = [];
+  for (let i = 0; i <= 80; i++) pts.push(x(end * i / 80).toFixed(4));
+  return { easing: `linear(${pts.join(', ')})`, ms: Math.round(end * 1000) };
+}
+if (CSS.supports('transition-timing-function', 'linear(0, 1)')) {
+  const root = document.documentElement.style;
+  for (const [name, r, d] of [['liquid', .52, .74], ['melt', .78, .88], ['ripple', .30, .55]]) {
+    const s = spring(r, d);
+    root.setProperty(`--${name}`, s.easing);
+    root.setProperty(`--${name}-d`, `${s.ms}ms`);
+  }
+}
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- Geometría del logo (igual que LogoGeometry.swift) ---------- */
+const G = { n: 4.0, inset: 0.215, amp: 0.088, width: 0.118 };
+function squirclePath(x, y, w, h, n = G.n, samples = 240) {
+  let d = '';
+  for (let i = 0; i < samples; i++) {
+    const t = i / samples * 2 * Math.PI, c = Math.cos(t), s = Math.sin(t);
+    const px = x + w / 2 + w / 2 * Math.sign(c) * Math.pow(Math.abs(c), 2 / n);
+    const py = y + h / 2 + h / 2 * Math.sign(s) * Math.pow(Math.abs(s), 2 / n);
+    d += (i ? 'L' : 'M') + px.toFixed(2) + ' ' + py.toFixed(2);
+  }
+  return d + 'Z';
+}
+function wavePath(x, y, w, h, phase = 0, amp = G.amp, samples = 80) {
+  let d = '';
+  const x0 = x + w * G.inset, x1 = x + w - w * G.inset;
+  for (let i = 0; i <= samples; i++) {
+    const u = i / samples;
+    d += (i ? 'L' : 'M') + (x0 + (x1 - x0) * u).toFixed(2) + ' ' + (y + h / 2 - h * amp * Math.sin(2 * Math.PI * u + phase)).toFixed(2);
+  }
+  return d;
+}
+const SQ = squirclePath(0, 0, 100, 100);
+const ROUNDED_SQUARE_WRONG = 'M0 0H100V100H0Z';
+let gid = 0;
+function drawLogo(svg) {
+  const v = svg.dataset.variant || 'black';
+  const id = 'g' + (gid++);
+  const ink = { black: '#06141B', flat: '#06141B', white: '#FFFFFF', outline: 'none', color: '#E0457B', square: '#06141B' }[v];
+  const waveColor = v === 'white' ? '#06141B' : v === 'outline' ? '#06141B' : '#FFFFFF';
+  const glossy = v === 'black' || v === 'square';
+  const body = v === 'square' ? ROUNDED_SQUARE_WRONG : SQ;
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="${id}b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1A2D3B"/><stop offset="1" stop-color="#06141B"/></linearGradient>
+      <radialGradient id="${id}h" cx=".5" cy="-.3" r=".85"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    </defs>
+    <path d="${body}" fill="${glossy ? `url(#${id}b)` : ink}" ${v === 'outline' ? 'stroke="#06141B" stroke-width="5"' : ''} ${v === 'outline' ? 'transform="translate(2.5 2.5) scale(.95)"' : ''}/>
+    ${glossy ? `<path d="${body}" fill="url(#${id}h)"/>` : ''}
+    <path class="wave" d="${wavePath(0, 0, 100, 100)}" fill="none" stroke="${waveColor}" stroke-width="${(G.width * 100).toFixed(1)}" stroke-linecap="round" stroke-linejoin="round" ${v === 'outline' ? 'stroke-width="6"' : ''}/>`;
+  if (v === 'outline') svg.querySelector('.wave').setAttribute('stroke-width', '6');
+}
+document.querySelectorAll('svg.logo').forEach(drawLogo);
+
+/* La onda del logo vivo se mece suave (en la app: fase = 0,5 · sen(1,2 t)) */
+const live = [...document.querySelectorAll('svg.logo.live .wave')];
+function sway(ts) {
+  const phase = 0.5 * Math.sin(ts / 1000 * 1.2);
+  const d = wavePath(0, 0, 100, 100, phase);
+  live.forEach(w => w.setAttribute('d', d));
+  requestAnimationFrame(sway);
+}
+if (!reduce) requestAnimationFrame(sway);
+
+/* Construcción */
+(function () {
+  const s = document.getElementById('construction');
+  const guides = [];
+  guides.push(`<rect x="0" y="0" width="100" height="100" fill="none" stroke="#DBDBDB" stroke-width=".4" stroke-dasharray="1.6 1.2"/>`);
+  for (const gx of [21.5, 78.5]) guides.push(`<line x1="${gx}" y1="-8" x2="${gx}" y2="108" stroke="#C7871A" stroke-width=".35" stroke-dasharray="1.5 1"/>`);
+  for (const gy of [50 - 8.8, 50 + 8.8]) guides.push(`<line x1="-8" y1="${gy}" x2="108" y2="${gy}" stroke="#2D6BFF" stroke-width=".35" stroke-dasharray="1.5 1"/>`);
+  guides.push(`<line x1="-8" y1="50" x2="108" y2="50" stroke="#707070" stroke-width=".3"/>`);
+  s.innerHTML = `<path d="${SQ}" fill="#06141B"/>
+    <path d="${wavePath(0,0,100,100)}" fill="none" stroke="#fff" stroke-width="11.8" stroke-linecap="round"/>
+    <path d="${wavePath(0,0,100,100)}" fill="none" stroke="#999" stroke-width=".35"/>
+    ${guides.join('')}
+    <text x="21.5" y="-9" font-size="3.4" fill="#C7871A" text-anchor="middle" font-family="ui-rounded,system-ui">21,5 %</text>
+    <text x="99" y="39.5" font-size="3.4" fill="#2D6BFF" text-anchor="end" font-family="ui-rounded,system-ui">±8,8 %</text>
+    <text x="50" y="111" font-size="3.4" fill="#707070" text-anchor="middle" font-family="ui-rounded,system-ui">|x|⁴ + |y|⁴ = 1</text>`;
+})();
+
+/* ---------- Nombres ---------- */
+const names = ['Ondi'];
+const pick = document.getElementById('namePick');
+names.forEach((n, i) => {
+  const b = document.createElement('button');
+  b.className = 'pill' + (i === 0 ? ' on' : '');
+  b.textContent = n;
+  b.onclick = () => {
+    pick.querySelectorAll('button').forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    document.querySelectorAll('.brand-name').forEach(el => el.textContent = n);
+    document.title = `Brand kit · ${n}`;
+  };
+  pick.appendChild(b);
+});
+
+/* ---------- Selectores con gota que se estira ---------- */
+function initSeg(seg) {
+  const drop = seg.querySelector('.drop');
+  const buttons = [...seg.querySelectorAll('button')];
+  const place = (btn, animate = true, dir = 0) => {
+    const l = btn.offsetLeft, r = seg.clientWidth - (btn.offsetLeft + btn.offsetWidth);
+    // El borde que va delante sale primero; el de atrás lo sigue: se estira como una gota
+    drop.style.transitionDelay = !animate ? '0ms, 0ms' : dir > 0 ? '70ms, 0ms' : '0ms, 70ms';
+    if (!animate) drop.style.transition = 'none';
+    drop.style.setProperty('--l', l + 'px');
+    drop.style.setProperty('--r', r + 'px');
+    if (!animate) { drop.offsetWidth; drop.style.transition = ''; }
+  };
+  const current = () => buttons.find(b => b.classList.contains('on')) || buttons[0];
+  requestAnimationFrame(() => place(current(), false));
+  buttons.forEach(b => b.addEventListener('click', () => {
+    const from = buttons.indexOf(current()), to = buttons.indexOf(b);
+    buttons.forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    place(b, true, Math.sign(to - from));
+  }));
+  addEventListener('resize', () => place(current(), false));
+}
+document.querySelectorAll('[data-seg]').forEach(initSeg);
+
+/* ---------- Interruptores: la gota se estira hacia donde va ---------- */
+document.querySelectorAll('.toggle input').forEach(inp => {
+  inp.addEventListener('change', () => {
+    const k = inp.nextElementSibling.querySelector('.knob');
+    k.classList.remove('stretch-r', 'stretch-l');
+    k.offsetWidth;
+    k.classList.add(inp.checked ? 'stretch-r' : 'stretch-l');
+  });
+});
+
+/* ---------- Orbes ---------- */
+const icons = {
+  gear: '<circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="12" r="7.6" fill="none" stroke="currentColor" stroke-width="3.2" stroke-dasharray="2.7 3.27" stroke-linecap="round"/>',
+  pad: '<path d="M7 7h10a5 5 0 0 1 4.8 6.4l-1 3.6a2.6 2.6 0 0 1-4.5 1L14.7 16H9.3l-1.6 2a2.6 2.6 0 0 1-4.5-1l-1-3.6A5 5 0 0 1 7 7Zm.5 3v1.5H6v1.5h1.5v1.5H9V13h1.5v-1.5H9V10Zm8.5.3a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm-2 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z" fill="currentColor"/>',
+  pulse: '<path d="M3 12h4l2-5 4 10 2-5h6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>',
+  help: '<path d="M9.2 9a2.9 2.9 0 1 1 4.2 2.6c-.9.5-1.4 1.1-1.4 2v.6M12 17.6v.1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>',
+  plus: '<path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>'
+};
+const waveSvg = '<svg viewBox="0 0 200 100" preserveAspectRatio="none"><defs><linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2C4252"/><stop offset="1" stop-color="#06141B"/></linearGradient></defs><path d="M0 6 Q12.5 0 25 6 T50 6 T75 6 T100 6 T125 6 T150 6 T175 6 T200 6 V100 H0 Z" fill="url(#wg)"/></svg>';
+function orb(icon, label) {
+  return `<button class="orb" title="${label}" aria-label="${label}"><span class="water">${waveSvg}</span><svg class="glyph" viewBox="0 0 24 24">${icons[icon]}</svg></button>`;
+}
+document.getElementById('orbs').innerHTML = ['gear', 'pad', 'pulse', 'help', 'plus'].map((i, k) => orb(i, ['Ajustes', 'Controles', 'Estado', 'Guía', 'Agregar'][k])).join('');
+
+/* ---------- Derretir ---------- */
+const card = document.getElementById('meltCard'), meltBtn = document.getElementById('meltBtn');
+meltBtn.onclick = () => {
+  if (!card.classList.contains('melted')) {
+    card.classList.add('melted');
+    meltBtn.textContent = 'Que vuelva';
+  } else {
+    card.classList.remove('melted');
+    card.classList.add('dripping');
+    card.offsetWidth;
+    card.classList.remove('dripping');
+    meltBtn.textContent = 'Derretir la tarjeta';
+  }
+  card.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+};
+
+/* ---------- Progreso ---------- */
+const steps = [['38%', 'Etapa 4 de 9 · Traduciendo shaders'], ['61%', 'Etapa 6 de 9 · Compilando shaders'], ['86%', 'Etapa 8 de 9 · Pipelines'], ['100%', 'Lista para jugar'], ['12%', 'Etapa 1 de 9 · Extrayendo']];
+let si = 0;
+document.getElementById('progBtn').onclick = () => {
+  si = (si + 1) % steps.length;
+  document.getElementById('prog').style.setProperty('--v', steps[si][0]);
+  document.getElementById('progLabel').textContent = steps[si][1];
+};
+
+/* ================= Inicio: carrusel ================= */
+const library = [
+  { n: 'Tu juego',    meta: 'v1.9.0 · 15,5 GB · 13 min jugados', st: 'ready',    art: 0 },
+  { n: 'Aventura',    meta: 'v1.2.0 · 12,4 GB',                  st: 'building', art: 1, p: 61, stage: 'Etapa 6 de 9 · Compilando shaders' },
+  { n: 'Carreras',    meta: 'v2.0.1 · 8,1 GB · 4 h jugadas',      st: 'ready',    art: 2 },
+  { n: 'Puzzle',      meta: 'v1.0.0 · 2,3 GB',                   st: 'tobuild',  art: 3 },
+  { n: 'Plataformas', meta: 'v1.1.0 · 5,7 GB · 52 min jugados',   st: 'ready',    art: 4 },
+  { n: 'Ritmo',       meta: 'v1.0.3 · 3,9 GB',                   st: 'ready',    art: 5 },
+  { n: 'Estrategia',  meta: 'Solo actualización · 1,1 GB',        st: 'missing',  art: 6 },
+];
+/* Portadas de ejemplo: composiciones abstractas con la paleta (el kit no usa arte de juegos reales) */
+function coverArt(k) {
+  const P = ['#06141B', '#11212D', '#253745', '#4A5C6A', '#9BA8AB', '#CCD0CF'];
+  const bg = [[P[2], P[0]], [P[5], P[3]], [P[1], P[0]], [P[4], P[2]], [P[3], P[1]], [P[5], P[4]], [P[2], P[1]]][k];
+  const fg = k % 2 ? P[0] : '#fff';
+  const shapes = [
+    `<circle cx="50" cy="50" r="22" fill="${fg}" opacity=".9"/><circle cx="50" cy="50" r="33" fill="none" stroke="${fg}" stroke-width="1.5" opacity=".35"/><circle cx="50" cy="50" r="44" fill="none" stroke="${fg}" stroke-width="1" opacity=".2"/>`,
+    `<path d="${wavePath(0, -8, 100, 100, 0, .09)}" fill="none" stroke="${fg}" stroke-width="7" stroke-linecap="round"/><path d="${wavePath(0, 8, 100, 100, .8, .07)}" fill="none" stroke="${fg}" stroke-width="3" stroke-linecap="round" opacity=".45"/>`,
+    `<rect x="18" y="58" width="64" height="9" rx="4.5" fill="${fg}" opacity=".85"/><rect x="26" y="44" width="48" height="9" rx="4.5" fill="${fg}" opacity=".55"/><rect x="34" y="30" width="32" height="9" rx="4.5" fill="${fg}" opacity=".3"/>`,
+    `<rect x="22" y="22" width="25" height="25" rx="8" fill="${fg}"/><rect x="53" y="22" width="25" height="25" rx="8" fill="${fg}" opacity=".5"/><rect x="22" y="53" width="25" height="25" rx="8" fill="${fg}" opacity=".3"/><rect x="53" y="53" width="25" height="25" rx="8" fill="${fg}" opacity=".8"/>`,
+    `<path d="M14 72 Q30 40 46 60 T78 34" fill="none" stroke="${fg}" stroke-width="6" stroke-linecap="round"/><circle cx="78" cy="34" r="6" fill="${fg}"/>`,
+    `${[0,1,2,3,4].map(i => `<rect x="${20 + i * 13}" y="${50 - [10,22,32,18,8][i]}" width="7" height="${[20,44,64,36,16][i]}" rx="3.5" fill="${fg}" opacity="${.45 + i * .1}"/>`).join('')}`,
+    `<path d="M50 18 L80 50 L50 82 L20 50 Z" fill="none" stroke="${fg}" stroke-width="5" stroke-linejoin="round" opacity=".8"/><circle cx="50" cy="50" r="9" fill="${fg}"/>`,
+  ][k];
+  return `<svg class="cover" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="cg${k}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${bg[0]}"/><stop offset="1" stop-color="${bg[1]}"/></linearGradient></defs><rect width="100" height="100" fill="url(#cg${k})"/>${shapes}</svg>`;
+}
+const ring = document.getElementById('ring');
+ring.innerHTML = library.map((g, i) => `<div class="cv" data-i="${i}" style="--k:${Math.min(i, 9)}"><div class="art">${coverArt(g.art)}</div><div class="refl">${coverArt(g.art)}</div></div>`).join('');
+const cvs = [...ring.querySelectorAll('.cv')];
+document.getElementById('dots').innerHTML = `<div class="dots-wrap">${library.map((_, i) => `<b data-i="${i}"></b>`).join('')}<span class="blob"></span></div>`;
+const dots = [...document.querySelectorAll('#dots b')];
+let pos = 0, index = 0;
+
+/* Cada portada se coloca según su distancia al centro: gira, se aleja, se desenfoca un poco y se apaga */
+function layout(p) {
+  cvs.forEach((el, i) => {
+    const o = i - p, a = Math.abs(o), sgn = Math.sign(o);
+    const x = sgn * (Math.min(a, 1) * 250 + Math.max(0, a - 1) * 150);
+    const rot = -Math.max(-1.3, Math.min(1.3, o)) * 40;
+    const z = -Math.min(a, 4) * 120;
+    const sc = 1 - Math.min(a, 3) * .05;
+    el.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${rot}deg) scale(${sc})`;
+    el.style.filter = `blur(${Math.min(a, 3) * 1.4}px) brightness(${1 - Math.min(a, 3) * .16})`;
+    el.style.opacity = a > 3.4 ? 0 : 1 - Math.max(0, a - 2.2) * .7;
+    el.style.zIndex = 100 - Math.round(a * 10);
+  });
+}
+function splitName(n) { return [...n].map((c, i) => `<span class="ch" style="animation-delay:${i * 22}ms">${c}</span>`).join(''); }
+function focus(i, animate = true) {
+  index = Math.max(0, Math.min(library.length - 1, i));
+  pos = index;
+  ring.classList.remove('dragging');
+  layout(pos);
+  document.querySelector('#dots .blob').style.setProperty('--x', (index * 15 - 7.5) + 'px');
+  const g = library[index];
+  document.getElementById('gName').innerHTML = splitName(g.n);
+  const meta = document.getElementById('gMeta'), st = document.getElementById('gStatus'), act = document.getElementById('gActions');
+  meta.textContent = g.meta;
+  const status = {
+    ready:    ['var(--ok)',   'Listo para jugar'],
+    building: ['var(--warn)', g.stage],
+    tobuild:  ['var(--c5)',   'Por compilar · la primera vez tarda unos 40 min'],
+    missing:  ['var(--bad)',  'Falta el juego base'],
+  }[g.st];
+  st.innerHTML = `<span class="status" style="--dot:${status[0]}"><i></i><span class="${g.st === 'building' ? 'shimmer' : ''}">${status[1]}</span></span>` +
+    (g.st === 'building' ? `<div class="bar"><div class="progress" style="--v:${g.p}%"><div class="fill"></div></div></div>` : '');
+  act.innerHTML = {
+    ready:    '<button class="pill light large">▶︎ Jugar</button><button class="pill ghost">Detalles</button>',
+    building: '<button class="pill ghost large">Ver progreso</button>',
+    tobuild:  '<button class="pill light large">Compilar para Mac</button><button class="pill ghost">Detalles</button>',
+    missing:  '<button class="pill light large">Agregar archivos</button>',
+  }[g.st];
+  for (const el of [meta, st, act]) { el.classList.remove('swap'); el.offsetWidth; el.classList.add('swap'); }
+}
+
+/* Arrastrar: la portada sigue al dedo; al soltar, el resorte la lleva a la más cercana según la velocidad */
+let drag = null;
+ring.addEventListener('pointerdown', e => {
+  drag = { x: e.clientX, start: pos, t: performance.now(), vx: 0, lx: e.clientX, lt: performance.now(), moved: false };
+  ring.setPointerCapture(e.pointerId);
+});
+ring.addEventListener('pointermove', e => {
+  if (!drag) return;
+  const dx = e.clientX - drag.x;
+  if (Math.abs(dx) > 4 && !drag.moved) { drag.moved = true; ring.classList.add('dragging'); }
+  if (!drag.moved) return;
+  const now = performance.now();
+  drag.vx = (e.clientX - drag.lx) / Math.max(1, now - drag.lt); drag.lx = e.clientX; drag.lt = now;
+  pos = Math.max(-.4, Math.min(library.length - .6, drag.start - dx / 250));
+  layout(pos);
+});
+ring.addEventListener('pointerup', e => {
+  if (!drag) return;
+  if (!drag.moved) {
+    const hit = e.target.closest('.cv');
+    if (hit) focus(+hit.dataset.i);
+  } else {
+    focus(Math.round(pos - drag.vx * 2.2));
+  }
+  drag = null;
+});
+/* Deslizar con dos dedos en el trackpad (o Shift + rueda) */
+let wheelAcc = 0, wheelLock = 0;
+ring.addEventListener('wheel', e => {
+  const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+  if (!d) return;
+  e.preventDefault();
+  wheelAcc += d;
+  const now = performance.now();
+  if (Math.abs(wheelAcc) > 45 && now > wheelLock) { focus(index + Math.sign(wheelAcc)); wheelAcc = 0; wheelLock = now + 260; }
+}, { passive: false });
+const stage = document.getElementById('stage');
+stage.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') { focus(index + 1); e.preventDefault(); }
+  if (e.key === 'ArrowLeft') { focus(index - 1); e.preventDefault(); }
+});
+dots.forEach(d => d.addEventListener('click', () => focus(+d.dataset.i)));
+const iconBtn = ([l, svg]) => `<button class="icon-btn" aria-label="${l}" title="${l}"><svg viewBox="0 0 24 24">${svg}</svg></button>`;
+document.getElementById('stageDock').innerHTML =
+  [['Ajustes', icons.gear], ['Controles', icons.pad]].map(iconBtn).join('') +
+  '<div class="seg" data-seg><span class="drop"></span><button class="on">Todos</button><button>Favoritos</button><button>Listos</button><button>Recientes</button></div>' +
+  [['Estado del sistema', icons.pulse], ['Guía', icons.help]].map(iconBtn).join('');
+initSeg(document.querySelector('#stageDock [data-seg]'));
+layout(0);
+focus(0);
+
+/* El reloj: cada dígito que cambia se derrite hacia arriba y el nuevo sube desde abajo */
+const clockEl = document.getElementById('bigclock');
+let shown = '';
+function renderClock(str) {
+  if (!shown) clockEl.innerHTML = [...str].map(c => `<span class="d${c === ':' ? ' colon' : ''}"></span>`).join('');
+  const slots = clockEl.querySelectorAll('.d');
+  [...str].forEach((c, i) => {
+    if (shown[i] === c) return;
+    const slot = slots[i];
+    slot.querySelectorAll('span').forEach(old => { old.className = 'out'; setTimeout(() => old.remove(), 650); });
+    const n = document.createElement('span');
+    n.className = 'in'; n.textContent = c; n.style.animationDelay = shown ? '120ms' : `${i * 70}ms`;
+    slot.appendChild(n);
+  });
+  shown = str;
+}
+function tick() {
+  const d = new Date();
+  renderClock(d.toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit' }));
+  const s = d.toLocaleDateString('es', { weekday: 'long', day: 'numeric', month: 'long' });
+  document.getElementById('bigdate').textContent = s[0].toUpperCase() + s.slice(1);
+}
+tick(); setInterval(tick, 5000);
+
+/* La isla: cada estado es una cara; el contenedor cambia de ancho con resorte y las caras se cruzan con desenfoque */
+const islandStates = [
+  `<svg viewBox="0 0 100 100" style="width:18px;height:18px"><path d="${squirclePath(0,0,100,100)}" fill="#fff" opacity=".14"/><path d="${wavePath(0,0,100,100)}" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round"/></svg><span>Todo al día</span>`,
+  `<span style="width:8px;height:8px;border-radius:50%;background:var(--warn);box-shadow:0 0 10px var(--warn)"></span><span class="shimmer">Compilando Aventura</span><span class="mini"><b style="--v:61%"></b></span><span style="color:var(--c5)">61 %</span>`,
+  `<svg viewBox="0 0 24 24" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="var(--ok)"/><path d="m7.5 12.3 3 3 6-6.3" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Aventura está lista</span><span style="color:var(--c5)">Jugar ▸</span>`,
+];
+const island = document.getElementById('island');
+const measurerBox = document.createElement('div');
+measurerBox.className = 'island';
+measurerBox.style.cssText = 'position:fixed;left:-9999px;top:0;width:auto;visibility:hidden;transition:none';
+const measurer = document.createElement('div');
+measurer.className = 'face';
+measurer.style.cssText = 'position:static;display:inline-flex;height:40px';
+measurerBox.appendChild(measurer);
+document.body.appendChild(measurerBox);
+let islandAt = -1;
+function islandTo(k) {
+  islandAt = k;
+  measurer.innerHTML = islandStates[k];
+  island.style.width = Math.ceil(measurer.getBoundingClientRect().width) + 'px';
+  island.querySelectorAll('.face').forEach(f => { f.className = 'face out'; setTimeout(() => f.remove(), 260); });
+  const f = document.createElement('div');
+  f.className = 'face in'; f.style.animationDelay = '90ms'; f.innerHTML = islandStates[k];
+  island.appendChild(f);
+}
+island.addEventListener('click', () => islandTo((islandAt + 1) % islandStates.length));
+islandTo(0);
+setInterval(() => { if (!reduce && !document.hidden) islandTo((islandAt + 1) % islandStates.length); }, 4200);
+
+/* Entrada en cascada cuando el escenario aparece en pantalla */
+new IntersectionObserver((entries, obs) => {
+  entries.forEach(e => { if (e.isIntersecting) { stage.classList.add('shown'); obs.disconnect(); } });
+}, { threshold: .25 }).observe(stage);
+
+/* Demos de componentes nuevos */
+function replayReveal() {
+  const el = document.getElementById('revealDemo');
+  el.innerHTML = 'Tus juegos, en tu Mac.'.split(' ').map((w, i) => `<span class="w" style="animation-delay:${i * 60}ms">${w}</span>`).join(' ');
+}
+replayReveal();
+document.getElementById('revealBtn').onclick = replayReveal;
+const toastsEl = document.getElementById('toasts');
+toastsEl.onclick = () => toastsEl.classList.toggle('open');
+</script>
+</body>
+</html>

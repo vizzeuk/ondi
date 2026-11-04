@@ -1,0 +1,10 @@
+name: Una idea
+description: Algo que te gustaría que Ondi hiciera
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: La idea
+      description: Qué te gustaría y para qué te serviría.
+    validations:
+      required: true

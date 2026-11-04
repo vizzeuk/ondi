@@ -1,0 +1,33 @@
+name: Algo no funciona
+description: Un error de Ondi o un juego que no compila o no arranca
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **No pidas, enlaces ni expliques cómo conseguir juegos, claves o firmware.** Esos issues se cierran sin respuesta.
+  - type: input
+    id: mac
+    attributes:
+      label: Tu Mac
+      placeholder: "MacBook Air M5, macOS 26.6, Xcode 27.1"
+    validations:
+      required: true
+  - type: input
+    id: game
+    attributes:
+      label: Juego y versión (si aplica)
+      placeholder: "ID 0100XXXXXXXXX000, actualización 1.2.0"
+  - type: textarea
+    id: what
+    attributes:
+      label: Qué pasó
+      description: Qué hiciste, qué esperabas y qué ocurrió. Si es una compilación, pega las últimas líneas del registro (Ver registro).
+    validations:
+      required: true
+  - type: checkboxes
+    id: own
+    attributes:
+      label: Confirmación
+      options:
+        - label: Uso juegos y claves de mi propia consola.
+          required: true

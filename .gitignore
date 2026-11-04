@@ -1,0 +1,12 @@
+.build/
+build/
+*.xcodeproj
+.swiftpm/
+# Never commit keys or games
+*.keys
+prod.keys
+title.keys
+*.nsp
+*.nsz
+*.xci
+*.xcz
