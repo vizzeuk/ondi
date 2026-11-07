@@ -1,3 +1,4 @@
+import ImageIO
 import SwiftUI
 import UniformTypeIdentifiers
 
@@ -105,6 +106,17 @@ struct HomeView: View {
         }
         .animation(Motion.out(0.38), value: openGameID)
         .onAppear(perform: startPad)
+        .task {
+            // NXB_CAROUSEL_CYCLE=1: moves the carousel by itself, for profiling
+            guard ProcessInfo.processInfo.environment["NXB_CAROUSEL_CYCLE"] != nil else { return }
+            var step = 1
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .milliseconds(600))
+                let i = focusIndex.wrappedValue
+                if !visibleGames.indices.contains(i + step) { step = -step }
+                move(step)
+            }
+        }
         .onDisappear { pad.stop() }
         .environment(\.dynamicTypeSize, store.config.largeText ? .xLarge : .large)
         .dropDestination(for: URL.self) { urls, _ in
@@ -244,6 +256,12 @@ struct HomeView: View {
             }
         }
         .onDisappear { scroller.stop() }
+        .onChange(of: store.games.count) {
+            // NXB_FOCUS=<n>: starts with the n-th cover in the middle (screenshots)
+            if let n = Int(ProcessInfo.processInfo.environment["NXB_FOCUS"] ?? ""), visibleGames.indices.contains(n), selectedID == nil || n > 0 {
+                selectedID = visibleGames[n].id
+            }
+        }
         .onChange(of: filter) { keepSelectionVisible() }
         .onChange(of: search) { keepSelectionVisible() }
         .onChange(of: store.games.map(\.id)) { keepSelectionVisible() }
@@ -462,19 +480,42 @@ struct CoverView: View {
                 CoverPlaceholder(name: game.name, seed: game.colorSeed)
             }
         }
-        .task(id: coverKey) { image = Self.load(game) }
+        .task(id: coverKey) { image = await CoverCache.image(for: game, key: coverKey) }
     }
 
     private var coverKey: String { (game.coverURL?.path ?? "") + "|" + (game.app?.url.path ?? "") }
 
-    private static func load(_ game: Game) -> NSImage? {
-        if let url = game.coverURL, let img = NSImage(contentsOf: url) { return img }
-        if let app = game.app, app.hasIcon {
+}
+
+/// Covers decoded once, at the largest size they are shown (640 px), and shared by every view that draws them
+/// (the carousel's cover and its reflection, the game's screen). Read off the main thread.
+@MainActor
+enum CoverCache {
+    private static var images: [String: NSImage] = [:]
+
+    static func image(for game: Game, key: String) async -> NSImage? {
+        if let cached = images[key] { return cached }
+        let cover = game.coverURL, app = game.app
+        let decoded: CGImage? = await Task.detached(priority: .userInitiated) {
+            if let cover, let source = CGImageSourceCreateWithURL(cover as CFURL, nil) {
+                return CGImageSourceCreateThumbnailAtIndex(source, 0, [
+                    kCGImageSourceCreateThumbnailFromImageAlways: true,
+                    kCGImageSourceThumbnailMaxPixelSize: 640,
+                    kCGImageSourceShouldCacheImmediately: true,
+                ] as CFDictionary)
+            }
+            return nil
+        }.value
+        var result: NSImage?
+        if let decoded {
+            result = NSImage(cgImage: decoded, size: NSSize(width: decoded.width, height: decoded.height))
+        } else if let app, app.hasIcon {
             let icon = NSWorkspace.shared.icon(forFile: app.url.path)
             icon.size = NSSize(width: 512, height: 512)
-            return icon
+            result = icon
         }
-        return nil
+        if let result { images[key] = result }
+        return result
     }
 }
 

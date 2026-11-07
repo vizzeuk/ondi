@@ -8,7 +8,8 @@
 Pones tus juegos y tus claves; Ondi instala lo que hace falta, los compila y los deja listos para jugar.</p>
 
 <p align="center">
-  <a href="docs/GUIA.md">Guía completa</a> ·
+  <a href="docs/INSTALACION.md">Instalación</a> ·
+  <a href="docs/GUIA.md">Guía de uso</a> ·
   <a href="docs/COMPATIBILIDAD.md">Juegos compatibles</a> ·
   <a href="#english">English</a> ·
   <a href="NOTICE.md">Créditos</a> ·
@@ -33,7 +34,7 @@ Ondi es una app de Mac, open source y gratuita, que convierte los juegos que ext
 | ![Ficha de un juego](docs/images/juego.jpg) | **Una biblioteca que se siente viva.** Las portadas giran sobre un piso de agua con la hora detrás, y cada juego tiene su ficha con estado, versiones, calidad, controles, partidas y archivos. |
 | ![Asistente](docs/images/asistente-herramientas.jpg) | **Listo en minutos.** Un asistente revisa tu Mac, te ayuda con Xcode e instala por su cuenta todo lo demás. |
 | ![Controles](docs/images/controles.jpg) | **Cualquier mando.** Switch, PlayStation, Xbox, 8BitDo… con prueba botón por botón, teclas del teclado a tu gusto y modo sofá para manejar la biblioteca con el mando. |
-| ![Calidad](docs/images/calidad.jpg) | **Calidad a tu medida.** Perfiles Ahorro, Equilibrado, Calidad y Fluidez, o cada ajuste a mano. |
+| ![Calidad](docs/images/calidad.jpg) | **Rendimiento explicado.** Después de cada partida, Ondi te dice cuánto tiempo fue a 60 fps, cuántas veces bajó y qué ajustar, con un botón para cada recomendación. Más perfiles Ahorro, Equilibrado, Calidad y Fluidez. |
 | ![Partidas](docs/images/partidas.jpg) | **Tus partidas a salvo.** Respaldo automático antes de cada sesión, restaurar con un clic y sincronización por iCloud Drive. |
 
 Además: lista de compatibilidad con buscador, cola de compilación con notificaciones, gestión de espacio (borrar cachés, mover la biblioteca a otro disco), juegos en el Escritorio y la interfaz en español e inglés.
@@ -58,7 +59,7 @@ git clone https://github.com/vizzeuk/ondi.git && cd ondi
 ./scripts/make_app.sh --install      # compila Ondi.app y la copia a Aplicaciones
 ```
 
-Después, el asistente de primer uso te guía: tu Mac, las herramientas, tus claves y tu primer juego. Todo está explicado en la **[guía](docs/GUIA.md)**.
+Después, el asistente de primer uso te guía: tu Mac, las herramientas, tus claves y tu primer juego. Paso a paso, con capturas, en la **[guía de instalación](docs/INSTALACION.md)**; todo lo demás en la **[guía de uso](docs/GUIA.md)**.
 
 ## Preguntas frecuentes
 
@@ -79,7 +80,7 @@ Ondi está hecho en SwiftUI (macOS 14+) con Swift Package Manager:
 ```sh
 swift build                       # compilar
 ./scripts/make_app.sh             # crear build/Ondi.app
-NXB_DEMO=1 build/Ondi.app/Contents/MacOS/NXBiblioteca   # abrirla con una biblioteca de ejemplo
+NXB_DEMO=1 build/Ondi.app/Contents/MacOS/NXBiblioteca        # con juegos de ejemplo (NXB_DEMO=compat: títulos reales compatibles)
 ```
 
 **Traducciones.** El español es el idioma base. Cada idioma es un archivo en `Localization/` (por ejemplo `en.json`):
@@ -111,6 +112,6 @@ Para agregar un idioma, copia `Localization/en.json` como `Localization/<código
 
 - **Requirements:** Apple silicon, macOS 26.6+, Xcode.
 - **Install:** download `Ondi.zip` from [Releases](../../releases/latest). The app isn't notarized, so the first time go to System Settings › Privacy & Security › **Open Anyway**. Or build it with `./scripts/make_app.sh --install`.
-- **Features:** carousel library, setup assistant, any controller with a live button test, remappable keyboard, couch mode, quality presets, build queue with notifications, automatic save backups and iCloud Drive sync, disk space tools.
+- **Features:** carousel library, setup assistant, per-session performance report with one-click fixes, any controller with a live button test, remappable keyboard, couch mode, quality presets, build queue with notifications, automatic save backups and iCloud Drive sync, disk space tools.
 - **Language:** the interface follows your Mac's language (Spanish or English). Translations live in `Localization/` and are easy to add.
-- **Guide:** [docs/GUIA.md](docs/GUIA.md) (Spanish).
+- **Guides (Spanish):** [installation](docs/INSTALACION.md) · [using Ondi](docs/GUIA.md) · [compatible games](docs/COMPATIBILIDAD.md).

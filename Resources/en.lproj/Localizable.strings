@@ -70,6 +70,7 @@
 "Activa el HUD de Metal solo para el próximo inicio: FPS, tiempos de CPU/GPU y memoria." = "Turns on the Metal HUD for the next launch only: FPS, CPU/GPU times and memory.";
 "Activa iCloud Drive en Ajustes del Sistema › tu cuenta › iCloud para usarlo." = "Turn on iCloud Drive in System Settings › your account › iCloud to use it.";
 "Activado" = "On";
+"Activar" = "Turn on";
 "Actualiza el juego en la consola (o instala el DLC) como siempre." = "Update the game on your console (or install the DLC) as usual.";
 "Actualiza tu consola al firmware que pide el juego." = "Update your console to the firmware the game requires.";
 "Actualizaciones" = "Updates";
@@ -94,6 +95,7 @@
 "Ahora está en %@." = "It's now in %@.";
 "Ahorro" = "Eco";
 "Ahorro, Equilibrado, Calidad o Fluidez, o ajusta cada opción. Activa el contador de FPS para ver el efecto." = "Eco, Balanced, Quality or Smooth, or adjust each option. Turn on the FPS counter to see the effect.";
+"Ajuste aplicado" = "Setting applied";
 "Ajustes" = "Settings";
 "Ajustes del Sistema → General → Actualización de software" = "System Settings → General → Software Update";
 "Ajustes del Sistema → General → Actualización de software." = "System Settings → General → Software Update.";
@@ -102,8 +104,10 @@
 "Algunos juegos no se movieron" = "Some games weren't moved";
 "Antes de cada partida se guarda una copia automática (las últimas 10)." = "A copy is saved automatically before each play session (the last 10).";
 "Antes de restaurar" = "Before restoring";
+"Apagar" = "Turn off";
 "Aparece cuando compilas el juego." = "Appears when you build the game.";
 "Aplicado a %lld juego(s)." = "Applied to %lld game(s).";
+"Aplicar" = "Apply";
 "Aplicar a todos" = "Apply to all";
 "Apunta a esta copia. Instálala en Aplicaciones para que no dependa de la carpeta de compilación." = "Points to this copy. Install it in Applications so it doesn't depend on the build folder.";
 "Apunta a la copia de Aplicaciones." = "Points to the copy in Applications.";
@@ -123,6 +127,7 @@
 "Av Pág" = "Page Down";
 "Aviso" = "Notice";
 "Aún no hay respaldos. Se guardan en %@ dentro de tu biblioteca." = "No backups yet. They're saved in %@ inside your library.";
+"Baja la escala de render al 85 %" = "Lower the render scale to 85 %";
 "Bajar a 30 si va tarde" = "Drop to 30 when running late";
 "Base" = "Base";
 "Batería %lld %%" = "Battery %lld %%";
@@ -159,6 +164,7 @@
 "Cancelar compilación" = "Cancel build";
 "Carpeta de la biblioteca" = "Library folder";
 "Carpeta del motor" = "Engine folder";
+"Casi siempre a 60" = "Almost always at 60";
 "Centro de problemas" = "Problem center";
 "Cerrar" = "Close";
 "Cierra el juego primero" = "Quit the game first";
@@ -184,6 +190,7 @@
 "Comprobamos que pueda mover tus juegos." = "We check that your games can be moved.";
 "Comprobando el sistema…" = "Checking the system…";
 "Comprobando…" = "Checking…";
+"Con el cargador conectado rinde igual o mejor" = "Plugged in, it performs the same or better";
 "Conecta uno por Bluetooth (Ajustes del Sistema › Bluetooth) o por USB: Pro Controller o Joy-Con de Switch, DualSense o DualShock 4 de PlayStation, Xbox, 8BitDo… Aparece aquí al momento." = "Connect one via Bluetooth (System Settings › Bluetooth) or USB: Switch Pro Controller or Joy-Con, PlayStation DualSense or DualShock 4, Xbox, 8BitDo… It shows up here right away.";
 "Configurar" = "Set up";
 "Contador de FPS" = "FPS counter";
@@ -202,6 +209,7 @@
 "Crear un acceso directo al juego en el Escritorio" = "Create a shortcut to the game on the Desktop";
 "Cruceta" = "D-pad";
 "Crítico" = "Critical";
+"Cuando tres cuadros seguidos llegan tarde, el juego se queda a 30 fps unos segundos para no temblar. Apagándolo intenta seguir a 60 aunque a ratos vaya irregular." = "When three frames in a row are late, the game holds 30 fps for a few seconds so it doesn't stutter. Turned off, it keeps trying 60 even if it's uneven at times.";
 "Cómo llegar a jugar" = "How to get playing";
 "Cómo resolverlo" = "How to fix it";
 "Cómo sacar actualizaciones y DLC de tu consola" = "How to get updates and DLC from your console";
@@ -225,11 +233,13 @@
 "Deteniendo la compilación anterior…" = "Stopping the previous build…";
 "Detén la compilación anterior." = "Stop the previous build.";
 "Deutsch" = "Deutsch";
+"Dibuja menos píxeles en 3D; los textos y menús siguen nítidos. Es lo que más ayuda al girar la cámara." = "Draws fewer 3D pixels; text and menus stay sharp. It's what helps most when turning the camera.";
 "Disponible cuando termine la compilación." = "Available when the build finishes.";
 "Dock (TV)" = "Docked (TV)";
 "Dock (TV) usa la resolución de televisor. Portátil es más ligero y puede dar más FPS." = "Dock (TV) uses TV resolution. Handheld is lighter and can give more FPS.";
 "Eco" = "Echo";
 "Ejecuta el proceso de compilación." = "Runs the build process.";
+"El HUD de rendimiento está encendido" = "The performance HUD is on";
 "El archivo no tiene las claves %@. Puede estar incompleto o no ser un prod.keys." = "The file doesn't have the %@ keys. It may be incomplete or not a prod.keys file.";
 "El archivo prod.keys de tu consola. Con él, %@ abre tus juegos." = "Your console's prod.keys file. With it, %@ opens your games.";
 "El código de los juegos corre directo en chips M. En Intel no funciona." = "Game code runs directly on M-series chips. It doesn't work on Intel.";
@@ -240,6 +250,7 @@
 "El juego se cerró de forma inesperada" = "The game quit unexpectedly";
 "El juego se cierra al abrirlo" = "The game quits on launch";
 "El juego se detuvo por un error interno: suele pasar con versiones de juego o shaders no probados." = "The game stopped due to an internal error: this usually happens with untested game versions or shaders.";
+"El modo de bajo consumo está activo" = "Low Power Mode is on";
 "El monitor se activa cuando el juego está abierto" = "The monitor turns on when the game is open";
 "El motor cambió y el parche ya no encaja: %@" = "The engine changed and the patch no longer fits: %@";
 "El motor la usa durante la compilación." = "The engine uses it during the build.";
@@ -324,8 +335,10 @@
 "Favoritos" = "Favorites";
 "Fin" = "End";
 "Fluidez" = "Smooth";
+"Fluido" = "Smooth";
 "Fotogramas por segundo" = "Frames per second";
 "GPU" = "GPU";
+"GPU en el peor momento" = "GPU at its busiest";
 "Gatillos" = "Triggers";
 "Giroscopio" = "Gyroscope";
 "Gratis en la App Store. Trae el compilador de gráficos de Apple, que no se puede incluir en %@." = "Free on the App Store. It brings Apple's graphics compiler, which can't be included in %@.";
@@ -345,6 +358,7 @@
 "Herramientas" = "Tools";
 "Hilo de codificación" = "Encoding thread";
 "Hora" = "Time";
+"Hubo %lld tirones con la GPU holgada: es el juego cargando zonas o texturas. Traducir los gráficos en un hilo aparte deja más tiempo al juego." = "There were %lld hitches while the GPU had room to spare: that's the game loading areas or textures. Translating the graphics on a separate thread leaves the game more time.";
 "Idioma del juego" = "Game language";
 "Ignora vibraciones más suaves que esto (útil con controles que vibran todo el rato)." = "Ignores rumble weaker than this (useful with controllers that vibrate all the time).";
 "Imagen y juego" = "Picture and game";
@@ -378,6 +392,7 @@
 "Jugando ahora" = "Playing now";
 "Jugar" = "Play";
 "Jugar con contador de FPS" = "Play with FPS counter";
+"La GPU llegó al %@ %% de su tiempo por cuadro. MetalFX agranda cada cuadro a la resolución de tu pantalla (%@); sin él la imagen es un poco menos nítida y la GPU respira." = "The GPU reached %@ %% of its time per frame. MetalFX enlarges every frame to your screen's resolution (%@); without it the picture is a little less sharp and the GPU gets room.";
 "La app del juego y tus partidas no se tocan. Podrás recuperarla desde la papelera." = "The game app and your saves aren't touched. You can recover it from the Trash.";
 "La app del juego y tus partidas no se tocan. Si lo recompilas, la caché se vuelve a crear (tarda como la primera vez)." = "The game app and your saves aren't touched. If you rebuild it, the cache is created again (it takes as long as the first time).";
 "La app no trae el parche (vuelve a generarla con make_app.sh)." = "The app doesn't include the patch (generate it again with make_app.sh).";
@@ -396,6 +411,7 @@
 "La tienes. Es la combinación con la que el juego se probó (incluye mejoras como los 60 fps)." = "You have it. It's the combination the game was tested with (it includes improvements like 60 fps).";
 "La vibración del juego en un control conectado." = "The game's rumble on a connected controller.";
 "Las claves no están, están incompletas o son más antiguas que el juego (un juego nuevo necesita claves de una consola actualizada)." = "The keys are missing, incomplete or older than the game (a new game needs keys from an updated console).";
+"Le cuesta mantener 60" = "Struggles to hold 60";
 "Lee los archivos del juego y traduce sus shaders." = "Reads the game's files and translates its shaders.";
 "Libera espacio o borra cachés de compilación de otros juegos (pestaña Archivos)." = "Free up space or delete build caches from other games (Files tab).";
 "Librerías de Python (lz4, capstone, fonttools)" = "Python libraries (lz4, capstone, fonttools)";
@@ -436,6 +452,7 @@
 "Monitor" = "Monitor";
 "Mostrar" = "Show";
 "Mostrar FPS en esta partida" = "Show FPS in this session";
+"Mostrar FPS en pantalla usa un poco de GPU. Apágalo cuando no lo necesites." = "Showing FPS on screen uses a bit of GPU. Turn it off when you don't need it.";
 "Mostrar carpeta" = "Show folder";
 "Mostrar en Finder" = "Show in Finder";
 "Mostrar esta guía al abrir la app" = "Show this guide when the app opens";
@@ -537,6 +554,7 @@
 "Probar vibración" = "Test rumble";
 "Problemas detectados" = "Problems found";
 "Prueba con otro filtro o búsqueda." = "Try another filter or search.";
+"Prueba el hilo de codificación" = "Try the encode thread";
 "Prueba: pulsa cada botón y mueve los dos sticks en las cuatro direcciones." = "Test: press each button and move both sticks in all four directions.";
 "Puedes moverla a un disco externo. Las partidas no se mueven: viven en este Mac." = "You can move it to an external drive. Saves don't move: they live on this Mac.";
 "Pulsa Jugar o Return." = "Click Play or press Return.";
@@ -547,9 +565,12 @@
 "Python 3.12 o más nuevo" = "Python 3.12 or later";
 "Python 3.12 y sus librerías" = "Python 3.12 and its libraries";
 "Pégalo en la Terminal: %@" = "Paste it in Terminal: %@";
+"Que no baje a 30 de golpe" = "Don't drop to 30 all at once";
 "Quedan procesos de la compilación anterior. Reinicia el Mac si siguen." = "Processes from the previous build are still running. Restart your Mac if they persist.";
 "Quedan ~%@ en esta etapa" = "~%@ left in this stage";
 "Quedó corriendo de una sesión anterior de la app (por ejemplo, si la cerraste a mitad). Si compilas encima, las dos escriben en las mismas carpetas temporales y la nueva falla." = "It was left running from a previous app session (for example, if you quit it midway). If you build on top of it, both write to the same temporary folders and the new one fails.";
+"Quita el escalado MetalFX" = "Turn off MetalFX upscaling";
+"Quitar" = "Turn off";
 "Quitar %@" = "Remove %@";
 "Quitar de favoritos" = "Remove from favorites";
 "Quitar de la cola" = "Remove from queue";
@@ -585,6 +606,7 @@
 "Se incluirá %@." = "%@ will be included.";
 "Se incluirá al compilar." = "It will be included when you build.";
 "Se incluirán %@ y %lld DLC." = "%@ and %lld DLC will be included.";
+"Se usa la próxima vez que abras el juego." = "It's used the next time you open the game.";
 "Se usará" = "Will be used";
 "Se usará la versión probada" = "The tested version will be used";
 "Selecciónalo con el comando de abajo." = "Select it with the command below.";
@@ -644,10 +666,12 @@
 "Tu biblioteca está vacía" = "Your library is empty";
 "Tu biblioteca te espera" = "Your library awaits";
 "Tu primer juego" = "Your first game";
+"Tu última partida" = "Your last session";
 "Tus claves" = "Your keys";
 "Tus claves no salen de tu Mac" = "Your keys never leave your Mac";
 "Tus juegos de consola, convertidos en apps de Mac." = "Your console games, turned into Mac apps.";
 "Umbral de vibración" = "Rumble threshold";
+"Un Mac con chip Apple casi no se limita con batería, pero enchufado mantiene el máximo más tiempo en sesiones largas." = "An Apple silicon Mac barely holds back on battery, but plugged in it keeps its peak longer in long sessions.";
 "Un perfil solo cambia los ajustes que este juego ofrece. Puedes afinar cada uno abajo." = "A profile only changes the settings this game offers. You can fine-tune each one below.";
 "Una carpeta temporal (.partial) desapareció mientras se escribía. Pasa cuando otra compilación del mismo juego seguía corriendo, por ejemplo después de cerrar la app a mitad. Lo ya terminado se conserva." = "A temporary folder (.partial) disappeared while being written. This happens when another build of the same game was still running, for example after quitting the app midway. What already finished is kept.";
 "Una compilación anterior sigue activa" = "A previous build is still running";
@@ -665,6 +689,7 @@
 "Usaré solo juegos y claves de mi propia consola." = "I'll only use games and keys from my own console.";
 "Usas tus propios juegos" = "You use your own games";
 "Uso del chip gráfico" = "Graphics chip usage";
+"Va fluido: no hace falta cambiar nada." = "Running smoothly: nothing to change.";
 "Ventana" = "Window";
 "Ver detalles" = "See details";
 "Ver estado del sistema" = "View system status";
@@ -708,11 +733,14 @@
 "Ya lo instalé" = "I've installed it";
 "Ya puedes compilar de nuevo: se reutilizan las etapas que ya terminaron." = "You can build again now: stages that already finished are reused.";
 "Ya puedes jugar." = "You can play now.";
+"bajadas a 30 fps" = "drops to 30 fps";
+"del tiempo a 60 fps" = "of the time at 60 fps";
 "el juego base, sin actualización" = "the base game, without update";
 "en curso" = "in progress";
 "la actualización %@ (v%u)" = "update %@ (v%u)";
 "la versión v%u" = "version v%u";
 "macOS 26.6 o más nuevo" = "macOS 26.6 or later";
+"macOS limita el chip para ahorrar batería. Desactívalo en Ajustes del Sistema › Batería mientras juegas." = "macOS limits the chip to save battery. Turn it off in System Settings › Battery while you play.";
 "macOS registró un cierre inesperado. Toca para ver detalles." = "macOS logged an unexpected quit. Click for details.";
 "ninguna tecla" = "no key";
 "no such file or directory" = "no such file or directory";
@@ -726,6 +754,7 @@
 "sin botón" = "no button";
 "sin tecla" = "no key";
 "sin update" = "no update";
+"tirones" = "hitches";
 "v%u. Compila o recompila para aplicarla." = "v%u. Build or rebuild to apply it.";
 "zstd (compresión)" = "zstd (compression)";
 "¿Borrar la caché de compilación de %@?" = "Delete the build cache for %@?";

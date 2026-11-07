@@ -18,7 +18,7 @@ struct CoverCarousel: View {
         ZStack {
             ForEach(Array(games.enumerated()), id: \.element.id) { i, game in
                 let o = CGFloat(i) - pos
-                if abs(o) < 4.6 {
+                if abs(o) < 3.5 {   // past 3.4 a cover is fully transparent (CarouselPlacement): not drawn at all
                     CoverCard(game: game, side: side)
                         .modifier(CarouselPlacement(offset: o, side: side))
                         .zIndex(100 - Double(abs(o)) * 10)
@@ -79,7 +79,6 @@ struct CoverCard: View {
             art
                 .scaleEffect(x: 1, y: -1)
                 .opacity(0.42)
-                .blur(radius: 1.2)
                 .mask(LinearGradient(stops: [.init(color: .black, location: 0), .init(color: .black.opacity(0.35), location: 0.3), .init(color: .clear, location: 0.62)],
                                      startPoint: .top, endPoint: .bottom))
                 .allowsHitTesting(false)

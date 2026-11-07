@@ -308,7 +308,7 @@ final class LibraryStore {
             return (c, LibraryScanner.scan(root: root, catalog: c, tested: Catalog.loadTested(repo: repo)))
         }.value
         catalog = cat
-        games = ProcessInfo.processInfo.environment["NXB_DEMO"] != nil ? Self.demoLibrary() : list + Self.demoCopies(of: list)
+        games = ProcessInfo.processInfo.environment["NXB_DEMO"] != nil ? Self.demoLibrary(catalog: cat) : list + Self.demoCopies(of: list)
         applyControls()
     }
 
@@ -356,7 +356,24 @@ final class LibraryStore {
     }
 
     /// NXB_DEMO=1: a library of made-up games with abstract covers, in memory only (screenshots for the README).
-    private static func demoLibrary() -> [Game] {
+    /// NXB_DEMO=compat: real titles from the compatibility list instead (names only; the covers stay abstract, as no game art is shipped).
+    private static func demoLibrary(catalog: [TitleID: String]) -> [Game] {
+        if ProcessInfo.processInfo.environment["NXB_DEMO"] == "compat" {
+            let picks: [(String, Double, Bool)] = [
+                ("01007EF00011E000", 15.5, true), ("0100F2C0115B6000", 18.2, true), ("0100000000010000", 5.7, true),
+                ("0100152000022000", 17.4, false), ("01006F8002326000", 11.1, true), ("01006A800016E000", 16.6, true),
+                ("010015100B514000", 4.5, false), ("0100F43008C44000", 9.8, true), ("040074A01BF12000", 12.3, false), ("01004A4010FEA000", 13.9, true),
+            ]
+            let root = URL(fileURLWithPath: "/tmp/ondi-demo")
+            return picks.compactMap { hex, gb, built in
+                guard let tid = TitleID(hex: hex), let name = catalog[tid] else { return nil }
+                let files = [GameFile(url: root.appendingPathComponent("\(hex).nsp"), size: Int64(gb * 1_000_000_000), info: ContentInfo(titleID: tid, version: 0, kind: .base))]
+                let app = built ? BuiltApp(url: root.appendingPathComponent("\(hex).app"), titleID: hex, bundleID: "demo.ondi.\(hex)",
+                                           displayName: name, version: nil, hasIcon: false) : nil
+                return Game(folder: root.appendingPathComponent(hex), name: name, titleID: tid, files: files, app: app,
+                            coverURL: nil, hasProfile: true, buildFolder: nil, tested: nil)
+            }
+        }
         let items: [(String, Double, Bool, Bool)] = [
             (String(localized: "Isla de Marea"), 13.2, true, true), ("Ruta Nocturna", 8.4, true, false), (String(localized: "Bosque de Cristal"), 11.6, false, true),
             (String(localized: "Faro del Norte"), 5.1, true, true), (String(localized: "Pulso"), 3.9, true, false), ("Ciudad Flotante", 16.8, false, true), (String(localized: "Eco"), 2.3, true, false),

@@ -438,6 +438,7 @@ struct QualityTab: View {
     var body: some View {
         if let settings, settings.file != nil {
             VStack(alignment: .leading, spacing: 18) {
+                LastSessionCard(game: game, settings: settings)
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Perfiles de calidad").techLabel()
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 200), spacing: 12)], spacing: 12) {

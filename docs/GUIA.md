@@ -5,7 +5,7 @@ Todo lo que hace Ondi, paso a paso. Si es tu primera vez, lee **Instalar** y **L
 > [!IMPORTANT]
 > Ondi no incluye, no descarga y no enlaza juegos, claves ni firmware. Usa solo juegos que extraigas de tu propia consola y las claves de esa misma consola.
 
-**Contenido:** [Qué es](#qué-es) · [Qué necesitas](#qué-necesitas) · [Instalar](#instalar) · [La primera vez](#la-primera-vez) · [La biblioteca](#la-biblioteca) · [Agregar juegos](#agregar-juegos) · [Compilar](#compilar) · [La ficha de un juego](#la-ficha-de-un-juego) · [Jugar: teclado y mandos](#jugar-teclado-y-mandos) · [Calidad y FPS](#calidad-y-fps) · [Partidas](#partidas) · [Compatibilidad](#compatibilidad) · [Espacio](#espacio) · [Escritorio y Aplicaciones](#escritorio-y-aplicaciones) · [Idiomas](#idiomas) · [Si algo falla](#si-algo-falla) · [Desinstalar](#desinstalar)
+**Contenido:** [Qué es](#qué-es) · [Qué necesitas](#qué-necesitas) · [Instalar](#instalar) · [La primera vez](#la-primera-vez) · [La biblioteca](#la-biblioteca) · [Agregar juegos](#agregar-juegos) · [Compilar](#compilar) · [La ficha de un juego](#la-ficha-de-un-juego) · [Jugar: teclado y mandos](#jugar-teclado-y-mandos) · [Calidad y FPS](#calidad-y-fps) · [Rendimiento](#rendimiento) · [Partidas](#partidas) · [Compatibilidad](#compatibilidad) · [Espacio](#espacio) · [Escritorio y Aplicaciones](#escritorio-y-aplicaciones) · [Idiomas](#idiomas) · [Si algo falla](#si-algo-falla) · [Desinstalar](#desinstalar)
 
 ---
 
@@ -30,6 +30,8 @@ El trabajo de traducir cada juego lo hace un **motor** open source. Ondi lo desc
 Los juegos y las claves se extraen de tu consola con herramientas como **nxdumptool** o **DBI** (juegos) y **Lockpick_RCM** (claves). Las claves son únicas de tu consola: no las compartas ni uses las de otra persona.
 
 ## Instalar
+
+Paso a paso y con capturas en la **[guía de instalación](INSTALACION.md)**. En resumen:
 
 1. Descarga `Ondi.zip` de la [página de versiones](../../../releases) y descomprímelo.
 2. Arrastra **Ondi** a Aplicaciones.
@@ -127,6 +129,25 @@ Cuatro perfiles listos:
 - **Fluidez:** prioriza los FPS, sin bajar a 30.
 
 Debajo puedes cambiar cada ajuste: FPS, escala de render, modo de consola, escalado, idioma del juego, pantalla completa, vibración y opciones avanzadas de rendimiento. Los juegos van a 30 o 60 fps; para ver más de 60 hace falta una pantalla de 120 Hz.
+
+## Rendimiento
+
+Arriba de **Calidad y FPS**, la tarjeta **Tu última partida** lee el registro del juego y resume cómo fue: el tiempo a 60 fps, cuántas veces bajó a 30, los tirones y hasta dónde llegó la GPU. Debajo da recomendaciones según lo que pasó, cada una con un botón para aplicarla.
+
+**Por qué un juego baja a 30 fps.** Para ir a 60 fps, cada cuadro tiene 16,7 ms. Si tres cuadros seguidos llegan tarde (por ejemplo al girar la cámara, cuando aparece más escena), el juego se queda a 30 fps unos segundos para no temblar, y después vuelve a probar 60. No es un límite oculto: es la GPU yendo al máximo.
+
+**Qué ayuda más**, de mayor a menor impacto:
+
+| Ajuste | Efecto |
+|---|---|
+| Quitar el escalado **MetalFX** | Cada cuadro deja de agrandarse a la resolución de tu pantalla. En pantallas Retina grandes es el que más libera la GPU |
+| **Escala de render** al 85 % | Dibuja menos píxeles en 3D; textos y menús siguen nítidos |
+| **Modo portátil** | Usa la resolución de la consola en modo portátil, más liviana |
+| Apagar **Bajar a 30 si va tarde** | Sigue intentando 60 aunque a ratos vaya irregular, en vez de fijar 30 unos segundos |
+| **Hilo de codificación** | Si hay tirones con la GPU holgada (el juego cargando zonas), deja más tiempo al juego |
+| Apagar el **HUD de rendimiento** | Mostrar los FPS en pantalla usa un poco de GPU |
+
+El perfil **Fluidez** combina varias de estas opciones. En un MacBook Air, que no tiene ventilador, conviene empezar por **Equilibrado** o **Fluidez**; **Calidad** está pensado para Mac con más núcleos de GPU. Con batería el chip casi no se limita, salvo que esté activo el **modo de bajo consumo** de macOS (la tarjeta lo avisa).
 
 ## Partidas
 
